@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-This needs to be run through babel at https://babeljs.io/en/repl.htm before being uploaded to https://prodsandboxstorage.blob.core.windows.net/tstpub/tstrader/erd so that it is in IE11 compatible syntax and saved as erd-functions-ie11.js
+This needs to be run through babel at https://babeljs.io/en/repl.htm before being copied to erd-functions-ie11.js
 
 */
 
@@ -83,7 +83,7 @@ function processCSVData(csvData, asOfDate, callback) {
 		header: true
 	});
 	tablesFields = json['data'];
-	console.log(tablesFields);
+	//console.log(tablesFields);
 	//tablesFields = csvJSON(csvData);
 
 
@@ -205,7 +205,7 @@ function buildTree(elem, data, primaryTable, maxFromLevels, maxToLevels) {
      var description = $(this).data('description');
      if(description != '' && description != undefined){
          $('.erd-tooltip').html($(this).data('description'));
-         console.log('top: ' + $(this).offset().top);
+         //console.log('top: ' + $(this).offset().top);
          $('.erd-tooltip').css('top', $(this).offset().top);
          $('.erd-tooltip').css('left', $(this).offset().left + $(this).outerWidth() + 5);
          $('.erd-tooltip').show();            
@@ -259,7 +259,7 @@ function addTable(elem, data, tableName, tableList, level, includeAllFields) {
 	if (includeAllFields) {
 		data['tablesFields'].forEach(function (field) {
 			if (field['table_name'] == tableName) {
-				console.log(field['field_name']);
+				//console.log(field['field_name']);
 				if (field['description'] != '' && field['description'] != undefined) {
 					var tableRow = "<tr><td class=\"field\" tooltip=\"" + field['description'] + "\" data-field-name=\"" + field['field_name'] + "\">" + field['field_name'] + "</td></tr>            ";
 				} else {

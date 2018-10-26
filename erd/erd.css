@@ -41,6 +41,7 @@
 }
 .erd .db-table .field {
     background: #f0f0f0f0;
+    cursor: default;
 }
 
 
