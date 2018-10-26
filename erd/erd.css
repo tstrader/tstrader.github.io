@@ -1,0 +1,94 @@
+.erd table {
+    border-collapse: collapse;
+}
+
+/* DRAWING AREA */
+.erd .drawing-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3000px;
+    width: 3000px;
+}
+
+
+/* CONNECTORS */
+.erd .fk-connector {
+    stroke: #ff0000;
+    fill: none;
+    stroke-width: 1 
+}        
+
+/* DB TABLES */
+.erd .db-table {
+    position: absolute;
+    width: 300px;
+}
+.erd .db-table tr {
+    line-height: 24px;
+    border-bottom: 1px dashed #cecece;
+}
+.erd .db-table td {
+    padding: 0px 5px 0px 5px;
+    overflow: ellipsis;
+    box-sizing: border-box;
+}
+.erd .db-table .table-name {
+    background: #1f75e0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.erd .db-table .field {
+    background: #f0f0f0f0;
+}
+
+
+/* https://medium.freecodecamp.org/a-step-by-step-guide-to-making-pure-css-tooltips-3d5a3e237346 */
+
+[tooltip]{
+  margin:20px;
+  position:relative;
+}
+[tooltip]::before {
+    content: "";
+    position: absolute;
+
+    left:100%;
+    top:50%;
+    margin-left:1px;
+    transform:translateY(-50%) rotate(90deg);
+    
+    
+    border-width: 7px 7px 0 7px;
+    border-style: solid;
+    border-color: #333 transparent transparent     transparent;
+    z-index: 99;
+    opacity:0;    
+}
+[tooltip]::after {
+    content: attr(tooltip);
+    position: absolute;
+    
+    left:100%;
+    top:50%;
+    margin-left:11px;
+    transform: translateX(0%)   translateY(-14px);
+    
+    background: #333;
+    text-align: left;
+    color: #fff;
+    padding: 4px 7px 4px 7px;
+    font-size: 12px;
+    width: 300px;
+    border-radius: 5px;
+    pointer-events: none;
+    
+    z-index:99;
+    opacity:0;    
+}
+
+
+[tooltip]:hover::after,[tooltip]:hover::before {
+   opacity:1
+}
