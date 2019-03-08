@@ -1,4 +1,4 @@
-table_name,field_name,field_type,description,mapped_from_table,mapped_from_field,mapping_type,release_date,relationship_category,relationship_type
+table_name,field_name,field_type,description,mapped_from_table,mapped_from_field,mapping_type,release_date,relationship_category,cardinality
 contentProfiles,id,,,,,,,,
 contentProfiles,name,,,,,,,,
 contentProfiles,isPublished,,,,,,,,
