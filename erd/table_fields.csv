@@ -250,7 +250,7 @@ users,licenseType,,"The license type for the user such as premium, business, or 
 users,isSeismicEmployee,boolean,A flag indicating if the user is a Seismic employee,,,,prod,,
 users,isSystemAdmin,boolean,A flag indicating if the user has system administration permissions,,,,opdb-difficult,,
 users,defaultContentProfileId,uniqueidentifier,The id of the users default content profile,,,,prod,,
-users,defaultContentProfileName,,The name of the users default content profile,,,,tbd - materialize,,
+users,defaultContentProfileName,,The name of the users default content profile,,,,roadmap,,
 users,groups,json,The list of groups the user is a member of,,,,prod,,
 users,properties,json,The list of properties and values for the user,,,,prod,,
 workspaceComments,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
