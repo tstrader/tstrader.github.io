@@ -92,7 +92,7 @@ generatedLivedocOutputs,compatibility,nvarchar(max),The Acrobat version the PDF 
 generatedLivedocOutputs,hasOpenPassword,boolean,Boolean indicating if the PDF requires a password to open,,,,staging,,
 generatedLivedocOutputs,hasOwnerPassword,boolean,Boolean indicating if the PDF has a password to allow modifications,,,,staging,,
 generatedLivedocOutputs,hasOwnerOptions,boolean,Boolean indicating if the PDF is set to limit the options the owner can change on the unlocked PDF,,,,staging,,
-groupMembers,id,uniqueidentifier,The primary id for items in this table representing a user's assignment to a particular group,,,,,,
+groupMembers,id,uniqueidentifier,The primary id for items in this table representing a user's assignment to a particular group,,,,opdb,,
 groupMembers,groupId,uniqueidentifier,The id of the group that this member belongs to,groups,id,,opdb,,
 groupMembers,groupName,nvarchar(255),,,,,opdb,,
 groupMembers,userId,uniqueidentifier,,users,id,,opdb,,
