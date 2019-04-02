@@ -1,11 +1,11 @@
 table_name,field_name,field_type,description,mapped_from_table,mapped_from_field,mapping_type,release_date,relationship_category,cardinality
-contentProfiles,id,uniqueidentifier,,,,,opdb,,
-contentProfiles,name,nvarchar(255),,,,,opdb,,
-contentProfiles,isPublished,boolean,,,,,opdb,,
-contentProfiles,type,nvarchar(255),,,,,opdb,,
-contentProfiles,isPredictiveOnly,boolean,,,,,opdb,,
-contentProfiles,teamsiteId,uniqueidentifier,,,,,opdb,,
-contentProfiles,modifiedAt,datetime,,,,,opdb,,
+contentProfiles,id,uniqueidentifier,The id of a content profile,,,,opdb,,
+contentProfiles,name,nvarchar(255),The name of a content profile,,,,opdb,,
+contentProfiles,isPublished,boolean,A boolean indicating if the profile is published,,,,opdb,,
+contentProfiles,type,nvarchar(255),The type of profile (ChannelProfile or ContentProfile),,,,opdb,,
+contentProfiles,isPredictiveOnly,boolean,A boolean indicating if the profile is for predictive content use only,,,,opdb,,
+contentProfiles,teamsiteId,uniqueidentifier,The id of the teamsite the content profile belongs to,,,,opdb,,
+contentProfiles,modifiedAt,datetime,The datetime that the profile was last modified,,,,opdb,,
 contentProperties,id,uniqueidentifier,The id of the content property,,,,opdb,,
 contentProperties,name,nvarchar(255),The name of the content property,,,,opdb,,
 contentProperties,type,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
@@ -32,25 +32,25 @@ contentViewHistory,libraryContentVersionId,uniqueidentifier,The version id of th
 contentViewHistory,workspaceContentId,uniqueidentifier,The id of the workspace content that was viewed,workspaceContents,id,,prod,informational,N:1
 contentViewHistory,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was viewed,workspaceContentVersions,id,,prod,informational,N:1
 contentViewHistory,contentId,uniqueidentifier,The global content id of the content being viewed,contents,id,,roadmap,primary,N:1
-contentViewHistory,searchClickId,uniqueidentifier,,searchClick,id,,roadmap,,N:1
+contentViewHistory,searchClickId,uniqueidentifier,The id of the search click that the content activity is derived from,searchClick,id,,roadmap,,N:1
 contentViewHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed from,contentProfiles,id,,prod,informational,N:1
-contentViewHistory,productArea,nvarchar(255),,,,,roadmap,,
-contentViewHistory,application,nvarchar(255),,,,,roadmap,,
-emailRecipients,emailId,uniqueidentifier,,emails,id,,tbd,primary,N:1
-emailRecipients,externalUserEmail,nvarchar(255),,,,,tbd,,
-emailRecipients,externalUserId,uniqueidentifier,,externalUsers,id,,tbd,primary,N:1
+contentViewHistory,productArea,nvarchar(255),The product area that the user was in when they performed the view,,,,roadmap,,
+contentViewHistory,application,nvarchar(255),The application that the user was in when they performed the view,,,,roadmap,,
+emailRecipients,emailId,uniqueidentifier,The id from the email table that the email recipient received,emails,id,,tbd,primary,N:1
+emailRecipients,externalUserEmail,nvarchar(255),The email address of the external user,,,,tbd,,
+emailRecipients,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,tbd,primary,N:1
 emails,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-emails,createdBy,uniqueidentifier,,users,id,,tbd,primary,N:1
-emails,createdAt,datetime,,,,,tbd,,
-emails,subject,nvarchar(255),,,,,tbd,,
-emails,body,nvarchar(255),,,,,tbd,,
+emails,createdBy,uniqueidentifier,The user id of the user who created/sent the email,users,id,,tbd,primary,N:1
+emails,createdAt,datetime,The datetime that the email was sent,,,,tbd,,
+emails,subject,nvarchar(255),The subject of the email,,,,tbd,,
+emails,body,nvarchar(255),The body of the email,,,,tbd,,
 externalUsers,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
-externalUsers,email,nvarchar(255),,,,,roadmap,,
-externalUsers,emailDomain,nvarchar(255),,,,,roadmap,,
-externalUsers,trackingOptOut,boolean,,,,,roadmap,,
-externalUsers,emailOptOut,boolean,,,,,roadmap,,
+externalUsers,email,nvarchar(255),The email address of the external user,,,,roadmap,,
+externalUsers,emailDomain,nvarchar(255),The email domain of the external user,,,,roadmap,,
+externalUsers,trackingOptOut,boolean,A boolean indicating if this email address has opted out of tracking,,,,roadmap,,
+externalUsers,emailOptOut,boolean,A boolean indicating if this email address has opted out of receiving emails,,,,roadmap,,
 generatedLivedocs,id,uniqueidentifier,The unique identifier for a given generated livedoc,contents,id,,staging,primary,1:01
-generatedLivedocs,libraryContentId,uniqueidentifier,,libraryContents,id,,staging,informational,N:1
+generatedLivedocs,libraryContentId,uniqueidentifier,The id of the library content that this generated livedoc is based on,libraryContents,id,,staging,informational,N:1
 generatedLivedocs,libraryContentVersionId,uniqueidentifier,The libraryContentVersionId of the livedoc template,libraryContentVersions,id,,staging,informational,N:1
 generatedLivedocs,processingTime,decimal,The time it took the engine to process the document,,,,internal,,
 generatedLivedocs,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the generated livedoc,,,,roadmap,,
@@ -94,10 +94,10 @@ generatedLivedocOutputs,hasOwnerPassword,boolean,Boolean indicating if the PDF h
 generatedLivedocOutputs,hasOwnerOptions,boolean,Boolean indicating if the PDF is set to limit the options the owner can change on the unlocked PDF,,,,staging,,
 groupMembers,id,uniqueidentifier,The primary id for items in this table representing a user's assignment to a particular group,,,,opdb,,
 groupMembers,groupId,uniqueidentifier,The id of the group that this member belongs to,groups,id,,opdb,,
-groupMembers,groupName,nvarchar(255),,,,,opdb,,
-groupMembers,userId,uniqueidentifier,,users,id,,opdb,,
+groupMembers,groupName,nvarchar(255),The name of the group,,,,opdb,,
+groupMembers,userId,uniqueidentifier,The id of the user,users,id,,opdb,,
 groups,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
-groups,name,nvarchar(255),,,,,opdb,,
+groups,name,nvarchar(255),The name of the group,,,,opdb,,
 libraryContents,id,uniqueidentifier,The unique indentifier for a given document in the ControlCenter/ContentManager library,contents,id,,prod,primary,1:01
 libraryContents,name,nvarchar(255),The name of the document in the ControlCenter/ContentManager library,,,,prod,,
 libraryContents,version,nvarchar(255),The version number of the latest version of the document such as 5.3,,,,prod,,
@@ -122,31 +122,30 @@ libraryContents,properties,json,This is an object that contains all of the conte
 libraryContents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of the library content,,,,tbd,,
 libraryContents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of the library content,,,,tbd,,
 libraryContentVersions,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
-libraryContentVersions,name,nvarchar(255),,,,,opdb,,
-libraryContentVersions,libraryContentId,uniqueidentifier,,libraryContents,id,,opdb,primary,N:1
-libraryContentVersions,createdBy,uniqueidentifier,,users,id,,opdb,primary,N:1
-libraryContentVersions,size,integer,,,,,opdb,,
-libraryContentVersions,createdAt,datetime,,,,,opdb,,
-libraryContentVersions,modifiedAt,datetime,,,,,opdb,,
-libraryContentVersions,version,nvarchar(255),,,,,opdb,,
-libraryContentVersions,assignedToProfiles,json,,,,,opdb,,
-libraryContentVersions,isPublished,boolean,,,,,opdb,,
-libraryContentVersions,isExpired,boolean,,,,,opdb,,
-libraryContentVersions,expiresAt,datetime,,,,,opdb,,
+libraryContentVersions,name,nvarchar(255),The name of the library content,,,,opdb,,
+libraryContentVersions,libraryContentId,uniqueidentifier,The id of the library content this is a version of,libraryContents,id,,opdb,primary,N:1
+libraryContentVersions,createdBy,uniqueidentifier,The user id of the user who created this version,users,id,,opdb,primary,N:1
+libraryContentVersions,size,integer,The size in bytes of this version of the content,,,,opdb,,
+libraryContentVersions,createdAt,datetime,The datetime that this version was created,,,,opdb,,
+libraryContentVersions,modifiedAt,datetime,The datetime that this version was modified,,,,opdb,,
+libraryContentVersions,version,nvarchar(255),The version number of this version such as 4.0,,,,opdb,,
+libraryContentVersions,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,opdb,,
+libraryContentVersions,isPublished,boolean,A boolean indicating if this version is the published version,,,,opdb,,
+libraryContentVersions,isExpired,boolean,A boolean indicating if this version is expired,,,,opdb,,
+libraryContentVersions,expiresAt,datetime,The datetime that this version expires,,,,opdb,,
 libraryContentVersions,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image for this library content version,,,,tbd,,
 libraryContentVersions,previewImageId,uniqueidentifier,An id to the higher resolution preview image for this library content version,,,,tbd,,
 livedocGenerationHistory,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-livedocGenerationHistory,generatedLivedocId,uniqueidentifier,,generatedLivedocs,id,,tbd,primary,1:01
-livedocGenerationHistory,createdAt,datetime,,,,,tbd,,
-livedocGenerationHistory,createdBy,uniqueidentifier,,users,id,,tbd,primary,N:1
-livedocGenerationHistory,libraryContentId,uniqueidentifier,,libraryContents,id,,tbd,informational,N:1
-livedocGenerationHistory,libraryContentVersionId,uniqueidentifier,,libraryContentVersions,id,,tbd,informational,N:1
-livedocGenerationHistory,workspaceContentId,uniqueidentifier,,workspaceContents,id,,tbd,informational,N:1
-livedocGenerationHistory,workspaceContentVersionId,uniqueidentifier,,workspaceContentVersions,id,,tbd,informational,N:1
-livedocGenerationHistory,contentProfileId,uniqueidentifier,,contentProfiles,id,,tbd,primary,N:1
-livedocGenerationHistory,productArea,,,,,,tbd,,
-livedocGenerationHistory,application,,,,,,tbd,,
-livedocGenerationHistory,occurredAt,datetime,,,,,tbd,,
+livedocGenerationHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this event generated,generatedLivedocs,id,,tbd,primary,1:01
+livedocGenerationHistory,occurredAt,datetime,The datetime that this livedoc was generated,,,,tbd,,
+livedocGenerationHistory,createdBy,uniqueidentifier,The user id of the user who generated this livedoc,users,id,,tbd,primary,N:1
+livedocGenerationHistory,libraryContentId,uniqueidentifier,The library content id that this livedoc is based on,libraryContents,id,,tbd,informational,N:1
+livedocGenerationHistory,libraryContentVersionId,uniqueidentifier,The library content version id that this livedoc is based on,libraryContentVersions,id,,tbd,informational,N:1
+livedocGenerationHistory,workspaceContentId,uniqueidentifier,The workspace content id that was the starting point for this generated livedoc,workspaceContents,id,,tbd,informational,N:1
+livedocGenerationHistory,workspaceContentVersionId,uniqueidentifier,The workspace content version id that was the starting point for this generated livedoc,workspaceContentVersions,id,,tbd,informational,N:1
+livedocGenerationHistory,contentProfileId,uniqueidentifier,The content profile that this livedoc was generated from.  This is not included for livedocs generated in workspace.,contentProfiles,id,,tbd,primary,N:1
+livedocGenerationHistory,productArea,,The product area where this livedoc was generated from,,,,tbd,,
+livedocGenerationHistory,application,,The application that this livedoc was generated from,,,,tbd,,
 livesendLinkContents,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
 livesendLinkContents,name,,The name of the document in the livesend link,,,,prod,,
 livesendLinkContents,livesendLinkId,uniqueidentifier,The id of the livesend link that this content is included in,livesendLinks,id,,prod,primary,N:1
