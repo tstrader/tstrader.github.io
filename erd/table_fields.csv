@@ -49,7 +49,7 @@ externalUsers,email,nvarchar(255),The email address of the external user,,,,road
 externalUsers,emailDomain,nvarchar(255),The email domain of the external user,,,,roadmap,,
 externalUsers,trackingOptOut,boolean,A boolean indicating if this email address has opted out of tracking,,,,roadmap,,
 externalUsers,emailOptOut,boolean,A boolean indicating if this email address has opted out of receiving emails,,,,roadmap,,
-generatedLivedocs,id,uniqueidentifier,The unique identifier for a given generated livedoc,contents,id,,staging,primary,1:01
+generatedLivedocs,id,uniqueidentifier,The unique identifier for a given generated livedoc,contents,id,,staging,primary,1:1
 generatedLivedocs,libraryContentId,uniqueidentifier,The id of the library content that this generated livedoc is based on,libraryContents,id,,staging,informational,N:1
 generatedLivedocs,libraryContentVersionId,uniqueidentifier,The libraryContentVersionId of the livedoc template,libraryContentVersions,id,,staging,informational,N:1
 generatedLivedocs,processingTime,decimal,The time it took the engine to process the document,,,,internal,,
@@ -98,12 +98,12 @@ groupMembers,groupName,nvarchar(255),The name of the group,,,,opdb,,
 groupMembers,userId,uniqueidentifier,The id of the user,users,id,,opdb,,
 groups,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
 groups,name,nvarchar(255),The name of the group,,,,opdb,,
-libraryContents,id,uniqueidentifier,The unique indentifier for a given document in the ControlCenter/ContentManager library,contents,id,,prod,primary,1:01
+libraryContents,id,uniqueidentifier,The unique indentifier for a given document in the ControlCenter/ContentManager library,contents,id,,prod,primary,1:1
 libraryContents,name,nvarchar(255),The name of the document in the ControlCenter/ContentManager library,,,,prod,,
 libraryContents,version,nvarchar(255),The version number of the latest version of the document such as 5.3,,,,prod,,
 libraryContents,createdAt,datetime,The datetime that this document was created,,,,prod,,
 libraryContents,modifiedAt,datetime,The datetime that this document had any form of modification.  This is typically only used by machines and is not relevant for a person's perception of the last change to the document.,,,,prod,,
-libraryContents,latestLibraryContentVersionId,uniqueidentifier,The libraryContentVersionId for the latest version of this document,libraryContentVersions,id,,prod,informational,1:01
+libraryContents,latestLibraryContentVersionId,uniqueidentifier,The libraryContentVersionId for the latest version of this document,libraryContentVersions,id,,prod,informational,1:1
 libraryContents,latestLibraryContentVersionSize,integer,The size in bytes for the latest version of this document,,,,prod,,
 libraryContents,latestLibraryContentVersionCreatedAt,datetime,"The creation date for the latest version of this document, this is what most people think of when they ask 'when was this last updated'",,,,prod,,
 libraryContents,libraryUrl,nvarchar(max),The URL to this document in the library,,,,prod,,
@@ -136,7 +136,7 @@ libraryContentVersions,expiresAt,datetime,The datetime that this version expires
 libraryContentVersions,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image for this library content version,,,,tbd,,
 libraryContentVersions,previewImageId,uniqueidentifier,An id to the higher resolution preview image for this library content version,,,,tbd,,
 livedocGenerationHistory,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-livedocGenerationHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this event generated,generatedLivedocs,id,,tbd,primary,1:01
+livedocGenerationHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this event generated,generatedLivedocs,id,,tbd,primary,1:1
 livedocGenerationHistory,occurredAt,datetime,The datetime that this livedoc was generated,,,,tbd,,
 livedocGenerationHistory,createdBy,uniqueidentifier,The user id of the user who generated this livedoc,users,id,,tbd,primary,N:1
 livedocGenerationHistory,libraryContentId,uniqueidentifier,The library content id that this livedoc is based on,libraryContents,id,,tbd,informational,N:1
@@ -260,13 +260,13 @@ workspaceComments,workspaceContentId,uniqueidentifier,The workspace content id o
 workspaceComments,workspaceContentVersionId,uniqueidentifier,The workspace content version id of the content that the comment was made on,workspaceContentVersions,id,,opdb,,
 workspaceComments,pageIndex,integer,The 1-N based page number where the annotation was placed,,,,opdb,,
 workspaceComments,annotationType,,"The type of annotation (rectange, oval, pin, line) the comment is associated with",,,,opdb,,
-workspaceContents,id,uniqueidentifier,The primary id for items in this table,contents,id,,prod,primary,1:01
+workspaceContents,id,uniqueidentifier,The primary id for items in this table,contents,id,,prod,primary,1:1
 workspaceContents,name,,The name of the content,,,,prod,,
 workspaceContents,createdBy,uniqueidentifier,The user id of the user who created the first version of this content in workspace,users,id,,prod,primary,N:1
 workspaceContents,createdAt,datetime,The datetime that the first version of this content was created in Workspace,,,,prod,,
 workspaceContents,modifiedAt,datetime,The datetime that this content was last altered in any way,,,,prod,,
 workspaceContents,isDeleted,boolean,A boolean indicating if this content has been deleted from Workspace,,,,prod,,
-workspaceContents,latestWorkspaceContentVersionId,uniqueidentifier,The workspace version id of the highest version,workspaceContentVersions,id,,prod,informational,1:01
+workspaceContents,latestWorkspaceContentVersionId,uniqueidentifier,The workspace version id of the highest version,workspaceContentVersions,id,,prod,informational,1:1
 workspaceContents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the highest version was created,,,,prod,,
 workspaceContents,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,prod,,
 workspaceContents,isFolder,boolean,A boolean indicating if this content is a folder,,,,prod,,
@@ -521,16 +521,16 @@ contentUsageHistory,application,,The application the user was using when they pe
 contents,id,uniqueidentifier,"The id of the content which can globally identify content from library, workspace, or a generated livedoc",,,,roadmap,,
 contents,instanceName,,The name of the document as given by the user or generated as part of the Livedoc generation,,,,roadmap,,
 contents,normalizedName,,The normalized source content name.  This will be the library content name for all content that comes from the library and the workspace name for content directly uploaded to Workspace.,,,,roadmap,,
-contents,libraryContentId,uniqueidentifier,The id of the library content.  This id is also present on all generated livedocs as well as any workspace content that originated from the library,libraryContents,id,,roadmap,informational,1:01
+contents,libraryContentId,uniqueidentifier,The id of the library content.  This id is also present on all generated livedocs as well as any workspace content that originated from the library,libraryContents,id,,roadmap,informational,1:1
 contents,latestLibraryContentVersionId,uniqueidentifier,The id of the latest version of the library content,,,,roadmap,,
 contents,latestLibraryContentVersionCreatedAt,datetime,The datetime that the latest version of the library content was created,,,,roadmap,,
-contents,workspaceContentId,uniqueidentifier,The id of the workspace content,workspaceContents,id,,roadmap,informational,1:01
+contents,workspaceContentId,uniqueidentifier,The id of the workspace content,workspaceContents,id,,roadmap,informational,1:1
 contents,latestworkspaceContentVersionId,uniqueidentifier,The id of the latest version of the workspace content,,,,roadmap,,
 contents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the latest version of the workspace content was created,,,,roadmap,,
 contents,publishedVersionId,uniqueidentifier,The libraryContentVersionId of the highest published version of the document,,,,tbd,,
 contents,publishedVersionCreatedAt,datetime,The datetime that the highest published version was created,,,,tbd,,
 contents,publishedVersionExpiresAt,datetime,The expiration date for the highest published version,,,,roadmap,,
-contents,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that is represented in this table,generatedLivedocs,id,,roadmap,informational,1:01
+contents,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that is represented in this table,generatedLivedocs,id,,roadmap,informational,1:1
 contents,createdAt,datetime,"The datetime that the first version of this document was created relative to the document location (i.e. the createdAt for workspace content is when it was saved to workspace, not the date of the library content's creation)",,,,roadmap,,
 contents,createdBy,uniqueidentifier,The id of the user who created the content,,,,roadmap,,
 contents,modifiedAt,datetime,The datetime that this document or its metadata was modified in any way,,,,roadmap,,
