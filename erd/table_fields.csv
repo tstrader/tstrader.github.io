@@ -36,6 +36,9 @@ contentViewHistory,searchClickId,uniqueidentifier,The id of the search click tha
 contentViewHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed from,contentProfiles,id,,prod,informational,Nto1
 contentViewHistory,productArea,nvarchar(255),The product area that the user was in when they performed the view,,,,roadmap,,
 contentViewHistory,application,nvarchar(255),The application that the user was in when they performed the view,,,,roadmap,,
+contentViewHistory,contextId,nvarchar(255),The unique identifier of the external context that the view took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
+contentViewHistory,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
+contentViewHistory,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
 emailRecipients,emailId,uniqueidentifier,The id from the email table that the email recipient received,emails,id,,tbd,primary,Nto1
 emailRecipients,externalUserEmail,nvarchar(255),The email address of the external user,,,,tbd,,
 emailRecipients,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,tbd,primary,Nto1
@@ -496,6 +499,9 @@ userActivity,contentProfileId,uniqueidentifier,The id of the content profile thi
 userActivity,contentProfileName,,The name of the content profile this document was views or used in,,,,roadmap,,
 userActivity,productArea,,"The area of the product (DocCenter, NewsCenter, Workspace, Home Page, Search, etc...) where the action was performed",,,,roadmap,,
 userActivity,application,,"The application (Web, iOS, Android, Outlook, Gmail Salesforce, Dynamics, etc…) where the action was performed",,,,roadmap,,
+userActivity,contextId,nvarchar(255),The unique identifier of the external context that the action took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
+userActivity,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
+userActivity,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
 contentUsageHistory,id,uniqueidentifier,The primary id for events in this table,,,,prod,,
 contentUsageHistory,action,,"The usage/delivery action such as Download, Livesend, Send by Email, Add to Workspace, etc.",,,,prod,,
 contentUsageHistory,actionType,,An indicator if the delivery option is 'Built-In' as part of Seismic or is a 'Custom' delivery option,,,,prod,,
@@ -518,6 +524,9 @@ contentUsageHistory,searchClickId,uniqueidentifier,The search click that caused 
 contentUsageHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was delivered from,contentProfiles,id,,prod,primary,Nto1
 contentUsageHistory,productArea,,The product area that the user was in when they performed the delivery,,,,roadmap,,
 contentUsageHistory,application,,The application the user was using when they performed the delivery,,,,roadmap,,
+contentUsageHistory,contextId,nvarchar(255),The unique identifier of the external context that the delivery took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
+contentUsageHistory,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
+contentUsageHistory,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
 contents,id,uniqueidentifier,"The id of the content which can globally identify content from library, workspace, or a generated livedoc",,,,staging,,
 contents,instanceName,,The name of the document as given by the user or generated as part of the Livedoc generation,,,,staging,,
 contents,normalizedName,,The normalized source content name.  This will be the library content name for all content that comes from the library and the workspace name for content directly uploaded to Workspace.,,,,roadmap,,
