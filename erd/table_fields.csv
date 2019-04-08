@@ -520,13 +520,13 @@ contentUsageHistory,productArea,,The product area that the user was in when they
 contentUsageHistory,application,,The application the user was using when they performed the delivery,,,,roadmap,,
 contents,id,uniqueidentifier,"The id of the content which can globally identify content from library, workspace, or a generated livedoc",,,,staging,,
 contents,instanceName,,The name of the document as given by the user or generated as part of the Livedoc generation,,,,staging,,
-contents,normalizedName,,The normalized source content name.  This will be the library content name for all content that comes from the library and the workspace name for content directly uploaded to Workspace.,,,,staging,,
+contents,normalizedName,,The normalized source content name.  This will be the library content name for all content that comes from the library and the workspace name for content directly uploaded to Workspace.,,,,roadmap,,
 contents,libraryContentId,uniqueidentifier,The id of the library content.  This id is also present on all generated livedocs as well as any workspace content that originated from the library,libraryContents,id,,staging,informational,1to1
-contents,latestLibraryContentVersionId,uniqueidentifier,The id of the latest version of the library content,,,,roadmap,,
-contents,latestLibraryContentVersionCreatedAt,datetime,The datetime that the latest version of the library content was created,,,,roadmap,,
+contents,latestLibraryContentVersionId,uniqueidentifier,The id of the latest version of the library content,,,,staging,,
+contents,latestLibraryContentVersionCreatedAt,datetime,The datetime that the latest version of the library content was created,,,,staging,,
 contents,workspaceContentId,uniqueidentifier,The id of the workspace content,workspaceContents,id,,staging,informational,1to1
-contents,latestworkspaceContentVersionId,uniqueidentifier,The id of the latest version of the workspace content,,,,roadmap,,
-contents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the latest version of the workspace content was created,,,,roadmap,,
+contents,latestworkspaceContentVersionId,uniqueidentifier,The id of the latest version of the workspace content,,,,staging,,
+contents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the latest version of the workspace content was created,,,,staging,,
 contents,publishedVersionId,uniqueidentifier,The libraryContentVersionId of the highest published version of the document,,,,tbd,,
 contents,publishedVersionCreatedAt,datetime,The datetime that the highest published version was created,,,,tbd,,
 contents,publishedVersionExpiresAt,datetime,The expiration date for the highest published version,,,,staging,,
