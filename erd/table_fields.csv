@@ -11,11 +11,11 @@ contentProperties,name,nvarchar(255),The name of the content property,,,,opdb,,
 contentProperties,type,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
 contentProperties,teamsiteId,uniqueidentifier,The id of the teamsite that these properties are for,,,,opdb,,
 contentProperties,isRequired,boolean,One of the values assigned to the given user for this user property,,,,opdb,,
-contentPropertyAssignments,libraryContentId,uniqueidentifier,The id of the content that this property applies to,libraryContents,id,,opdb,primary,Nto1
-contentPropertyAssignments,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,opdb,primary,Nto1
-contentPropertyAssignments,contentPropertyName,nvarchar(255),The name of the content property,,,,opdb,,
-contentPropertyAssignments,contentPropertyType,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
-contentPropertyAssignments,contentPropertyValue,nvarchar(255),One of the values assigned to the given library content for this content property,,,,opdb,,
+contentPropertyAssignments,libraryContentId,uniqueidentifier,The id of the content that this property applies to,libraryContents,id,,staging,primary,Nto1
+contentPropertyAssignments,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,staging,primary,Nto1
+contentPropertyAssignments,contentPropertyName,nvarchar(255),The name of the content property,,,,staging,,
+contentPropertyAssignments,contentPropertyType,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,staging,,
+contentPropertyAssignments,contentPropertyValue,nvarchar(255),One of the values assigned to the given library content for this content property,,,,staging,,
 contentPropertyValues,value,nvarchar(255),One of the values for given content property,,,,opdb,,
 contentPropertyValues,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,opdb,primary,Nto1
 contentPropertyValues,contentPropertyName,nvarchar(255),The name of the content property,,,,opdb,,
