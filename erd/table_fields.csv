@@ -32,7 +32,8 @@ contentViewHistory,libraryContentVersionId,uniqueidentifier,The version id of th
 contentViewHistory,workspaceContentId,uniqueidentifier,The id of the workspace content that was viewed,workspaceContents,id,,prod,informational,Nto1
 contentViewHistory,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was viewed,workspaceContentVersions,id,,prod,informational,Nto1
 contentViewHistory,contentId,uniqueidentifier,The global content id of the content being viewed,contents,id,,staging,primary,Nto1
-contentViewHistory,searchClickId,uniqueidentifier,The id of the search click that the content activity is derived from,searchClick,id,,roadmap,,Nto1
+contentViewHistory,searchClickId,uniqueidentifier,The id of the search click that the content activity is derived from,searchClick,id,,tbd,,1to1
+contentViewHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content view event,referrerEvents,id,,roadmap,primary,1to1
 contentViewHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed from,contentProfiles,id,,prod,informational,Nto1
 contentViewHistory,productArea,nvarchar(255),The product area that the user was in when they performed the view,,,,roadmap,,
 contentViewHistory,application,nvarchar(255),The application that the user was in when they performed the view,,,,roadmap,,
@@ -520,7 +521,8 @@ contentUsageHistory,workspaceContentVersionId,uniqueidentifier,The version id of
 contentUsageHistory,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,prod,informational,Nto1
 contentUsageHistory,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,prod,primary,Nto1
 contentUsageHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that was delivered,generatedLivedocs,id,,staging,informational,Nto1
-contentUsageHistory,searchClickId,uniqueidentifier,The search click that caused this content usage.  Only applies to delivery which happens directly from the search results page.,searchClick,id,,roadmap,primary,Nto1
+contentUsageHistory,searchClickId,uniqueidentifier,The search click that caused this content usage.  Only applies to delivery which happens directly from the search results page.,searchClick,id,,tbd,primary,1to1
+contentUsageHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content usage event,referrerEvents,id,,roadmap,primary,1to1
 contentUsageHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was delivered from,contentProfiles,id,,prod,primary,Nto1
 contentUsageHistory,productArea,,The product area that the user was in when they performed the delivery,,,,roadmap,,
 contentUsageHistory,application,,The application the user was using when they performed the delivery,,,,roadmap,,
@@ -565,3 +567,16 @@ contents,isCartContent,boolean,A boolean indicating if this is content in a user
 contents,materializedPath,,The GUID path to this document in workspace,,,,roadmap,,
 contents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of this content,,,,roadmap,,
 contents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of this content,,,,roadmap,,
+referrerEvents,id,uniqueidentifier,An id which represents a particular referrer event.  This id is used as a general alias to represent one of the downstream events such as a searchClick in order to act as a proxy between a table like contentUsageHistory and the referring event,,,,,,
+referrerEvents,type,,"The type of referrer such as a searchClick, landingPageClick, pushNotificationClick, externalLink, etc…",,,,,,
+referrerEvents,category,,,,,,,,
+referrerEvents,productArea,,The product area that the referrer event took place in,,,,,,
+referrerEvents,application,,The application that the referrer event took place in,,,,,,
+referrerEvents,searchClickId,,The id of the search click that this referrer event represents,,,,,,
+referrerEvents,landingPageClickId,,The id of the landing page click that this referrer event represents,,,,,,
+referrerEvents,homepageClickId,,The id of the homepage click that this referrer event represents,,,,,,
+referrerEvents,articleLinkClickId,,The id of the article link click that this referrer event represents,,,,,,
+referrerEvents,pushNotificationClickId,,The id of the push notification click that this referrer event represents,,,,,,
+referrerEvents,doccenterNavigateClickId,,The id of the doccenter navigation click that this referrer event represents,,,,,,
+referrerEvents,workspaceNavigateClickId,,The id of the workspace navigation click that this referrer event represents,,,,,,
+referrerEvents,articleContentClickId,,The id of the article content click that this referrer event represents,,,,,,
