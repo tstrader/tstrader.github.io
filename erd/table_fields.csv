@@ -184,7 +184,7 @@ livesendViewingSession,livesendLinkId,uniqueidentifier,The id of the livesend li
 livesendViewingSession,viewDetails,json,[TBD] We may want some form of summary of the session?  Maybe as multiple fields not a JSON object.,,,,tbd,,
 livesendViewingSession,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,tbd,,
 livesendViewingSession,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,tbd,,
-searchClicks,id,uniqueidentifier,The primary id for events in this table,,,,roadmap,,
+searchClicks,id,uniqueidentifier,The primary id for events in this table,referrerEvents,id,,roadmap,primary,1to1
 searchClicks,searchHistoryId,uniqueidentifier,The id of the search history that this click happened in,searchHistory,id,,roadmap,primary,Nto1
 searchClicks,clickNumber,integer,The number of the click in the searchHistoryId in cases where the user clicks on many documents within a single set of search results,,,,roadmap,,
 searchClicks,viewMode,,"The view mode (list, card, or tile view) the user was in when they clicked on a document",,,,roadmap,,
