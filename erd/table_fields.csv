@@ -185,12 +185,21 @@ livesendViewingSession,viewDetails,json,[TBD] We may want some form of summary o
 livesendViewingSession,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,tbd,,
 livesendViewingSession,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,tbd,,
 searchClicks,id,uniqueidentifier,The primary id for events in this table,referrerEvents,id,,roadmap,primary,1to1
+searchClicks,type,nvarchar(255),"Whether the click leads to a view, preview, or delivery",,,,tbd,,
 searchClicks,searchHistoryId,uniqueidentifier,The id of the search history that this click happened in,searchHistory,id,,roadmap,primary,Nto1
-searchClicks,clickNumber,integer,The number of the click in the searchHistoryId in cases where the user clicks on many documents within a single set of search results,,,,roadmap,,
-searchClicks,viewMode,,"The view mode (list, card, or tile view) the user was in when they clicked on a document",,,,roadmap,,
+searchClicks,clickNumber,integer,The number of the click in the searchHistoryId in cases where the user clicks on many documents within a single set of search results,,,,tbd,,
+searchClicks,viewMode,nvarchar(255),"The view mode (list, card, tile, or typeahead view) the user was in when they clicked on a document",,,,roadmap,,
 searchClicks,currentPage,integer,The current page of the search when the click happened (pages numbered from 1),,,,roadmap,,
 searchClicks,resultRank,integer,The index of the item in the result list relative to the first item on page 1 (results numbered from 1).  ,,,,roadmap,,
-searchClicks,activeScope,,"Which scope (DocCenter, Workspace, ContentManager, or All) the user has active when they click on a document",,,,roadmap,,
+searchClicks,activeScope,nvarchar(255),"Which scope (DocCenter, Workspace, ContentManager, or All) the user has active when they click on a document",,,,roadmap,,
+searchClicks,contentId,uniqueidentifier,The content id of the content that the click occurred on,,,,internal,,
+searchClicks,contentVersionId,uniqueidentifier,The content version id of the content that the click occurred on,,,,internal,,
+searchClicks,instanceName,nvarchar(255),The name of the document or folder that was clicked,,,,roadmap,,
+searchClicks,occurredAt,datetime,The datetime that the click occurred at,,,,roadmap,,
+searchClicks,isFolder,boolean,A boolean indicating if the click was on a folder,,,,roadmap,,
+searchClicks,userId,uniqueidentifier,The id of the user who did the click,,,,roadmap,,
+searchClicks,application,nvarchar(255),The application that the click took place in,,,,roadmap,,
+searchClicks,productArea,nvarchar(255),"The product area that the click occurred in.  i.e. if you search from homepage, the productArea should be homepage.  Only when you are on the ""search"" page should the product area be ""search""",,,,tbd,,
 searchFacets,searchHistoryId,uniqueidentifier,The id of the search history that this facet acted on,searchHistory,id,,roadmap,primary,Nto1
 searchFacets,contentPropertyId,uniqueidentifier,The id of the content property that this facet is based on,contentProperties,id,,roadmap,informational,Nto1
 searchFacets,contentPropertyName,,The name of the content property that this facet is based on,,,,roadmap,,
