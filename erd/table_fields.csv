@@ -32,7 +32,6 @@ contentViewHistory,libraryContentVersionId,uniqueidentifier,The version id of th
 contentViewHistory,workspaceContentId,uniqueidentifier,The id of the workspace content that was viewed,workspaceContents,id,,prod,informational,Nto1
 contentViewHistory,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was viewed,workspaceContentVersions,id,,prod,informational,Nto1
 contentViewHistory,contentId,uniqueidentifier,The global content id of the content being viewed,contents,id,,staging,primary,Nto1
-contentViewHistory,searchClickId,uniqueidentifier,The id of the search click that the content activity is derived from,searchClick,id,,tbd,,1to1
 contentViewHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content view event,referrerEvents,id,,roadmap,primary,Nto1
 contentViewHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed from,contentProfiles,id,,prod,informational,Nto1
 contentViewHistory,productArea,nvarchar(255),The product area that the user was in when they performed the view,,,,roadmap,,
@@ -200,6 +199,12 @@ searchClicks,isFolder,boolean,A boolean indicating if the click was on a folder,
 searchClicks,userId,uniqueidentifier,The id of the user who did the click,,,,roadmap,,
 searchClicks,application,nvarchar(255),The application that the click took place in,,,,roadmap,,
 searchClicks,productArea,nvarchar(255),"The product area that the click occurred in.  i.e. if you search from homepage, the productArea should be homepage.  Only when you are on the ""search"" page should the product area be ""search""",,,,tbd,,
+landingPageClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+homepageClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+articleClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+folderNavigateClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+pushNotificationClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+universalLinkClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
 searchFacets,searchHistoryId,uniqueidentifier,The id of the search history that this facet acted on,searchHistory,id,,roadmap,primary,Nto1
 searchFacets,contentPropertyId,uniqueidentifier,The id of the content property that this facet is based on,contentProperties,id,,roadmap,informational,Nto1
 searchFacets,contentPropertyName,,The name of the content property that this facet is based on,,,,roadmap,,
@@ -506,7 +511,7 @@ userActivity,workspaceContentVersionId,uniqueidentifier,The version id of the wo
 userActivity,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,staging,informational,Nto1
 userActivity,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,staging,primary,Nto1
 userActivity,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that the activity took place on,generatedLivedocs,id,,staging,informational,Nto1
-userActivity,searchClickId,uniqueidentifier,The id of the search click that the content activity is derived from,searchClick,id,,roadmap,primary,Nto1
+userActivity,referrerEventId,uniqueidentifier,The id of the referrer event that the content activity is derived from,referrerEvents,id,,roadmap,primary,Nto1
 userActivity,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed or used in,contentProfiles,id,,staging,primary,Nto1
 userActivity,contentProfileName,,The name of the content profile this document was views or used in,,,,roadmap,,
 userActivity,productArea,,"The area of the product (DocCenter, NewsCenter, Workspace, Home Page, Search, etc...) where the action was performed",,,,roadmap,,
@@ -532,7 +537,6 @@ contentUsageHistory,workspaceContentVersionId,uniqueidentifier,The version id of
 contentUsageHistory,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,prod,informational,Nto1
 contentUsageHistory,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,prod,primary,Nto1
 contentUsageHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that was delivered,generatedLivedocs,id,,staging,informational,Nto1
-contentUsageHistory,searchClickId,uniqueidentifier,The search click that caused this content usage.  Only applies to delivery which happens directly from the search results page.,searchClick,id,,tbd,primary,1to1
 contentUsageHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content usage event,referrerEvents,id,,roadmap,primary,Nto1
 contentUsageHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was delivered from,contentProfiles,id,,prod,primary,Nto1
 contentUsageHistory,productArea,,The product area that the user was in when they performed the delivery,,,,roadmap,,
