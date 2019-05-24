@@ -138,7 +138,7 @@ libraryContentVersions,size,integer,The size in bytes of this version of the con
 libraryContentVersions,createdAt,datetime,The datetime that this version was created,,,,opdb,,
 libraryContentVersions,modifiedAt,datetime,The datetime that this version was modified,,,,opdb,,
 libraryContentVersions,version,nvarchar(255),The version number of this version such as 4.0,,,,opdb,,
-libraryContentVersions,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,opdb,,
+libraryContentVersions,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,tbd,,
 libraryContentVersions,isPublished,boolean,A boolean indicating if this version is the published version,,,,opdb,,
 libraryContentVersions,isExpired,boolean,A boolean indicating if this version is expired,,,,opdb,,
 libraryContentVersions,expiresAt,datetime,The datetime that this version expires,,,,opdb,,
