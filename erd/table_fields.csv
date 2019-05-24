@@ -11,6 +11,8 @@ contentProperties,name,nvarchar(255),The name of the content property,,,,opdb,,
 contentProperties,type,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
 contentProperties,teamsiteId,uniqueidentifier,The id of the teamsite that these properties are for,,,,opdb,,
 contentProperties,isRequired,boolean,One of the values assigned to the given user for this user property,,,,opdb,,
+contentProperties,hasDomainOfValues,boolean,A boolean indicating if this property has a fixed domain of values,,,,roadmap,,
+contentProperties,listOrder,integer,A 1-N number representing the order this property is in for the teamsite,,,,roadmap,,
 contentPropertyAssignments,libraryContentId,uniqueidentifier,The id of the content that this property applies to,libraryContents,id,,staging,primary,Nto1
 contentPropertyAssignments,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,staging,primary,Nto1
 contentPropertyAssignments,contentPropertyName,nvarchar(255),The name of the content property,,,,staging,,
