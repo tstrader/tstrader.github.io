@@ -1,397 +1,125 @@
 table_name,field_name,field_type,description,mapped_from_table,mapped_from_field,mapping_type,release_date,relationship_category,cardinality
+articleClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
 contentProfiles,id,uniqueidentifier,The id of a content profile,,,,opdb,,
-contentProfiles,name,nvarchar(255),The name of a content profile,,,,opdb,,
-contentProfiles,isPublished,boolean,A boolean indicating if the profile is published,,,,opdb,,
-contentProfiles,type,nvarchar(255),The type of profile (ChannelProfile or ContentProfile),,,,opdb,,
 contentProfiles,isPredictiveOnly,boolean,A boolean indicating if the profile is for predictive content use only,,,,opdb,,
-contentProfiles,teamsiteId,uniqueidentifier,The id of the teamsite the content profile belongs to,,,,opdb,,
+contentProfiles,isPublished,boolean,A boolean indicating if the profile is published,,,,opdb,,
 contentProfiles,modifiedAt,datetime,The datetime that the profile was last modified,,,,opdb,,
-contentProperties,id,uniqueidentifier,The id of the content property,,,,opdb,,
-contentProperties,name,nvarchar(255),The name of the content property,,,,opdb,,
-contentProperties,type,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
-contentProperties,teamsiteId,uniqueidentifier,The id of the teamsite that these properties are for,,,,opdb,,
-contentProperties,isRequired,boolean,One of the values assigned to the given user for this user property,,,,opdb,,
+contentProfiles,name,nvarchar(255),The name of a content profile,,,,opdb,,
+contentProfiles,teamsiteId,uniqueidentifier,The id of the teamsite the content profile belongs to,,,,opdb,,
+contentProfiles,type,nvarchar(255),The type of profile (ChannelProfile or ContentProfile),,,,opdb,,
 contentProperties,hasDomainOfValues,boolean,A boolean indicating if this property has a fixed domain of values,,,,roadmap,,
+contentProperties,id,uniqueidentifier,The id of the content property,,,,opdb,,
+contentProperties,isRequired,boolean,One of the values assigned to the given user for this user property,,,,opdb,,
 contentProperties,listOrder,integer,A 1-N number representing the order this property is in for the teamsite,,,,roadmap,,
-profileAssignments,libraryContentId,uniqueidentifier,The library content id of the content assigned to a content profile,libraryContents,id,,roadmap,,
-profileAssignments,contentProfileId,uniqueidentifier,The content profile id of the profile the content is assigned to,contentProfiles,id,,roadmap,,
-contentPropertyAssignments,libraryContentId,uniqueidentifier,The id of the content that this property applies to,libraryContents,id,,staging,primary,Nto1
+contentProperties,name,nvarchar(255),The name of the content property,,,,opdb,,
+contentProperties,teamsiteId,uniqueidentifier,The id of the teamsite that these properties are for,,,,opdb,,
+contentProperties,type,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
 contentPropertyAssignments,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,staging,primary,Nto1
 contentPropertyAssignments,contentPropertyName,nvarchar(255),The name of the content property,,,,staging,,
 contentPropertyAssignments,contentPropertyType,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,staging,,
 contentPropertyAssignments,contentPropertyValue,nvarchar(255),One of the values assigned to the given library content for this content property,,,,staging,,
-contentPropertyValues,value,nvarchar(255),One of the values for given content property,,,,opdb,,
+contentPropertyAssignments,libraryContentId,uniqueidentifier,The id of the content that this property applies to,libraryContents,id,,staging,primary,Nto1
 contentPropertyValues,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,opdb,primary,Nto1
 contentPropertyValues,contentPropertyName,nvarchar(255),The name of the content property,,,,opdb,,
 contentPropertyValues,contentPropertyType,nvarchar(255),"The type of the content property (multi-value, string, tag, integer, date, boolean, float)",,,,opdb,,
-contentViewHistory,id,uniqueidentifier,The primary id for events in this table,,,,prod,,
+contentPropertyValues,value,nvarchar(255),One of the values for given content property,,,,opdb,,
+contents,createdAt,datetime,"The datetime that the first version of this document was created relative to the document location (i.e. the createdAt for workspace content is when it was saved to workspace, not the date of the library content's creation)",,,,staging,,
+contents,createdBy,uniqueidentifier,The id of the user who created the content,,,,staging,,
+contents,deletedAt,datetime,The datetime that this document was deleted,,,,staging,,
+contents,docCenterUrl,,The universal url of the content in DocCenter,,,,staging,,
+contents,format,,The format of the content,,,,staging,,
+contents,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that is represented in this table,generatedLivedocs,id,,staging,informational,1to1
+contents,id,uniqueidentifier,"The id of the content which can globally identify content from library, workspace, or a generated livedoc",,,,staging,,
+contents,instanceName,,The name of the document as given by the user or generated as part of the Livedoc generation,,,,staging,,
+contents,isCartContent,boolean,A boolean indicating if this is content in a user's document cart (which is a specialzed hidden workspace folder),,,,staging,,
+contents,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,staging,,
+contents,isDeleted,boolean,A boolean indicating whether the content has been deleted,,,,staging,,
+contents,isFolder,boolean,A boolean indicating if this content is a folder,,,,staging,,
+contents,isPublished,boolean,A boolean indicating whether the content is currently published,,,,staging,,
+contents,latestLibraryContentVersionCreatedAt,datetime,The datetime that the latest version of the library content was created,,,,staging,,
+contents,latestLibraryContentVersionId,uniqueidentifier,The id of the latest version of the library content,,,,staging,,
+contents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the latest version of the workspace content was created,,,,staging,,
+contents,latestworkspaceContentVersionId,uniqueidentifier,The id of the latest version of the workspace content,,,,staging,,
+contents,libraryContentId,uniqueidentifier,The id of the library content.  This id is also present on all generated livedocs as well as any workspace content that originated from the library,libraryContents,id,,staging,informational,1to1
+contents,libraryUrl,,The url of the content in the Content Manager library,,,,staging,,
+contents,materializedPath,,The GUID path to this document in workspace,,,,roadmap,,
+contents,modifiedAt,datetime,The datetime that this document or its metadata was modified in any way,,,,staging,,
+contents,newsCenterUrl,,The universal url of the content in NewsCenter,,,,staging,,
+contents,normalizedName,,The normalized source content name.  This will be the library content name for all content that comes from the library and the workspace name for content directly uploaded to Workspace.,,,,roadmap,,
+contents,originContentProfileId,uniqueidentifier,The content profile id that the content originated from (this is present for all workspace content that has a libraryContentId),contentProfiles,id,,tbd,informational,Nto1
+contents,ownerId,uniqueidentifier,The id of the owner of the file in the library.  This is only present for content with a library content id (including generated livedocs and content in workspace).,users,id,,staging,primary,Nto1
+contents,ownerUsername,,The username of the owner of the file in the library.  This is only present for content with a library content id (including generated livedocs and content in workspace).,,,,roadmap,,
+contents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of this content,,,,roadmap,,
+contents,properties,json,This is an object that contains all of the content properties for this document,,,,staging,,
+contents,publishedVersionCreatedAt,datetime,The datetime that the highest published version was created,,,,tbd,,
+contents,publishedVersionExpiresAt,datetime,The expiration date for the highest published version,,,,staging,,
+contents,publishedVersionId,uniqueidentifier,The libraryContentVersionId of the highest published version of the document,,,,tbd,,
+contents,teamsiteId,uniqueidentifier,The teamsite id of content.  This will exist for all content that has a libraryContentId.,teamsites,id,,staging,primary,Nto1
+contents,teamsiteName,,The teamsite name of content.  This will exist for all content that has a libraryContentId.,,,,roadmap,,
+contents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of this content,,,,roadmap,,
+contents,totalPages,integer,The total number of pages of the latest version of the document,,,,tbd,,
+contents,version,,The library content version or workspace content version of the latest version of the content,,,,staging,,
+contents,workspaceContentId,uniqueidentifier,The id of the workspace content,workspaceContents,id,,staging,informational,1to1
+contents,workspaceUrl,,The url of the content in Workspace (what url do we want here?  Probably the share url?  Presumably we want to make sure this URL respects permissions?),,,,roadmap,,
+contentUsageHistory,action,,"The usage/delivery action such as Download, Livesend, Send by Email, Add to Workspace, etc.",,,,prod,,
+contentUsageHistory,actionType,,An indicator if the delivery option is 'Built-In' as part of Seismic or is a 'Custom' delivery option,,,,prod,,
+contentUsageHistory,application,,The application the user was using when they performed the delivery,,,,roadmap,,
+contentUsageHistory,contentId,uniqueidentifier,The id of the content that the delivery was performed on,,,,staging,primary,Nto1
+contentUsageHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was delivered from,contentProfiles,id,,prod,primary,Nto1
+contentUsageHistory,contextId,nvarchar(255),The unique identifier of the external context that the delivery took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
+contentUsageHistory,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
+contentUsageHistory,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
+contentUsageHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that was delivered,generatedLivedocs,id,,staging,informational,Nto1
+contentUsageHistory,id,uniqueidentifier,The primary id for events in this table,,,,prod,,
+contentUsageHistory,instanceFormat,,"The format of the delivered content (pptx, docx, pdf, etc.)",,,,prod,,
+contentUsageHistory,instanceName,,"The name given to the document before it was delivered.  Typically this is the name of the library content, except in cases of Livedocs with generated names or documents renamed in Workspace or cart before being delivered",,,,prod,,
+contentUsageHistory,isBoundDelivery,boolean,Boolean indicating if the usage is the result of a bound delivery option,,,,prod,,
+contentUsageHistory,libraryContentId,uniqueidentifier,The id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContents,id,,prod,informational,Nto1
+contentUsageHistory,libraryContentVersionId,uniqueidentifier,The version id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContentVersions,id,,staging,informational,Nto1
+contentUsageHistory,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,prod,primary,Nto1
+contentUsageHistory,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,prod,informational,Nto1
+contentUsageHistory,occurredAt,datetime,The datetime when the event occurred,,,,prod,,
+contentUsageHistory,productArea,,The product area that the user was in when they performed the delivery,,,,roadmap,,
+contentUsageHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content usage event,referrerEvents,id,,roadmap,primary,Nto1
+contentUsageHistory,totalPages,integer,"The number of pages of the delivered document.  Currently only provided for the Livesend action, but will be added for others in the future",,,,prod,,
+contentUsageHistory,userId,uniqueidentifier,The id of the user who performed the action,users,id,,prod,primary,Nto1
+contentUsageHistory,userUsername,,The username of the user who performed the action,,,,roadmap,,
+contentUsageHistory,workspaceContentId,uniqueidentifier,The id of the workspace content that was delivered,workspaceContents,id,,prod,informational,Nto1
+contentUsageHistory,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was delivered,workspaceContentVersions,id,,prod,informational,Nto1
 contentViewHistory,action,nvarchar(255),"The type of view action taken, currently always set to 'view' but may have additional view actions in the future",,,,prod,,
-contentViewHistory,occurredAt,datetime,The datetime when the event occurred,,,,prod,,
-contentViewHistory,userId,uniqueidentifier,The id of the user who performed the action,users,id,,prod,primary,Nto1
-contentViewHistory,userUsername,nvarchar(255),The username of the user who performed the action,,,,roadmap,,
-contentViewHistory,instanceName,nvarchar(255),"The name given to the document before it was delivered.  Typically this is the name of the library content, except in cases of Livedocs with generated names or documents renamed in Workspace or cart before being delivered",,,,staging,,
+contentViewHistory,application,nvarchar(255),The application that the user was in when they performed the view,,,,roadmap,,
+contentViewHistory,contentId,uniqueidentifier,The global content id of the content being viewed,contents,id,,staging,primary,Nto1
+contentViewHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed from,contentProfiles,id,,prod,informational,Nto1
+contentViewHistory,contextId,nvarchar(255),The unique identifier of the external context that the view took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
+contentViewHistory,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
+contentViewHistory,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
+contentViewHistory,id,uniqueidentifier,The primary id for events in this table,,,,prod,,
 contentViewHistory,instanceFormat,nvarchar(255),"The format of the viewed content (pptx, docx, pdf, etc.)",,,,staging,,
+contentViewHistory,instanceName,nvarchar(255),"The name given to the document before it was delivered.  Typically this is the name of the library content, except in cases of Livedocs with generated names or documents renamed in Workspace or cart before being delivered",,,,staging,,
 contentViewHistory,libraryContentId,uniqueidentifier,The id of the library content that was viewed even if the view was on a derived Workspace document,libraryContents,id,,prod,informational,Nto1
 contentViewHistory,libraryContentVersionId,uniqueidentifier,The version id of the library content that was viewed even if the view was on a derived Workspace document,libraryContentVersions,id,,prod,informational,Nto1
+contentViewHistory,occurredAt,datetime,The datetime when the event occurred,,,,prod,,
+contentViewHistory,productArea,nvarchar(255),The product area that the user was in when they performed the view,,,,roadmap,,
+contentViewHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content view event,referrerEvents,id,,roadmap,primary,Nto1
+contentViewHistory,userId,uniqueidentifier,The id of the user who performed the action,users,id,,prod,primary,Nto1
+contentViewHistory,userUsername,nvarchar(255),The username of the user who performed the action,,,,roadmap,,
 contentViewHistory,workspaceContentId,uniqueidentifier,The id of the workspace content that was viewed,workspaceContents,id,,prod,informational,Nto1
 contentViewHistory,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was viewed,workspaceContentVersions,id,,prod,informational,Nto1
-contentViewHistory,contentId,uniqueidentifier,The global content id of the content being viewed,contents,id,,staging,primary,Nto1
-contentViewHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content view event,referrerEvents,id,,roadmap,primary,Nto1
-contentViewHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed from,contentProfiles,id,,prod,informational,Nto1
-contentViewHistory,productArea,nvarchar(255),The product area that the user was in when they performed the view,,,,roadmap,,
-contentViewHistory,application,nvarchar(255),The application that the user was in when they performed the view,,,,roadmap,,
-contentViewHistory,contextId,nvarchar(255),The unique identifier of the external context that the view took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
-contentViewHistory,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
-contentViewHistory,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
-emailRecipients,emailId,uniqueidentifier,The id from the email table that the email recipient received,emails,id,,tbd,primary,Nto1
-emailRecipients,externalUserEmail,nvarchar(255),The email address of the external user,,,,tbd,,
-emailRecipients,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,tbd,primary,Nto1
-emails,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-emails,createdBy,uniqueidentifier,The user id of the user who created/sent the email,users,id,,tbd,primary,Nto1
-emails,createdAt,datetime,The datetime that the email was sent,,,,tbd,,
-emails,subject,nvarchar(255),The subject of the email,,,,tbd,,
-emails,body,nvarchar(255),The body of the email,,,,tbd,,
-externalUsers,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
-externalUsers,email,nvarchar(255),The email address of the external user,,,,roadmap,,
-externalUsers,emailDomain,nvarchar(255),The email domain of the external user,,,,roadmap,,
-externalUsers,trackingOptOut,boolean,A boolean indicating if this email address has opted out of tracking,,,,roadmap,,
-externalUsers,emailOptOut,boolean,A boolean indicating if this email address has opted out of receiving emails,,,,roadmap,,
-generatedLivedocs,id,uniqueidentifier,The unique identifier for a given generated livedoc,contents,id,,staging,primary,1to1
-generatedLivedocs,libraryContentId,uniqueidentifier,The id of the library content that this generated livedoc is based on,libraryContents,id,,staging,informational,Nto1
-generatedLivedocs,libraryContentVersionId,uniqueidentifier,The libraryContentVersionId of the livedoc template,libraryContentVersions,id,,staging,informational,Nto1
-generatedLivedocs,processingTime,decimal,The time it took the engine to process the document,,,,internal,,
-generatedLivedocs,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the generated livedoc,,,,roadmap,,
-generatedLivedocs,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the generated livedoc,,,,roadmap,,
-generatedLivedocs,userId,uniqueidentifier,The id of the user who generated the livedoc,users,id,,staging,,
-generatedLivedocs,occurredAt,datetime,The datetime the livedoc was generated,,,,staging,,
-generatedLivedocSlides,id,uniqueidentifier,The unique identifier for a given slide in the generated livedoc,,,,staging,,
-generatedLivedocSlides,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this slide was included in,generatedLivedocs,id,,staging,primary,Nto1
-generatedLivedocSlides,pageShortId,nvarchar(255),The global unique identifier for this slide,,,,staging,,
-generatedLivedocSlides,title,nvarchar(max),The title of this slide,,,,staging,,
-generatedLivedocSlides,position,integer,The 1-based position of this slide in the presentation,,,,staging,,
-generatedLivedocSlides,thumbnailImageId,uniqueidentifier,the lower resolution thumbnail imageId of this slide which can be used to get a thumbnail image of the slide,,,,roadmap,,
-generatedLivedocSlides,parentComponentId,uniqueidentifier,The component that this slide was in as part of this presentation,,,,staging,,
-generatedLivedocData,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
-generatedLivedocData,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this data belongs to,generatedLivedocs,id,,staging,primary,Nto1
-generatedLivedocData,fieldName,nvarchar(max),The name of the field,,,,staging,,
-generatedLivedocData,fieldValue,nvarchar(max),The value of the field,,,,staging,,
-generatedLivedocData,fieldType,nvarchar(255),"The type of the field such as integer, string, float, date",,,,staging,,
-generatedLivedocComponents,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
-generatedLivedocComponents,createdAt,datetime,The datetime the livedoc was generated,,,,staging,,
-generatedLivedocComponents,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this component was included in,generatedLivedocs,id,,staging,primary,Nto1
-generatedLivedocComponents,libraryContentId,uniqueidentifier,The libraryContentId of the component,,,,staging,,
-generatedLivedocComponents,libraryContentVersionId,uniqueidentifier,The libraryContentVersionId of the component,,,,staging,,
-generatedLivedocComponents,libraryContentShortId,uniqueidentifier,The short version of libraryContentId of the component (must have content id enabled in tenant),,,,staging,,
-generatedLivedocComponents,thumbnailImageId,uniqueidentifier,the lower resolution thumbnail imageId of the library content which can be used to get a thumbnail image of the library content,,,,roadmap,,
-generatedLivedocComponents,parentComponentId,uniqueidentifier,The id of the component that this component is a child of in this generated livedoc,,,,roadmap,,
-generatedLivedocComponents,libraryContentName,nvarchar(max),The name of this component in the library,,,,staging,,
-generatedLivedocComponents,insertStatus,nvarchar(255),"The status of the component insert (Not Published, Not Found, Success)",,,,staging,,
-generatedLivedocComponents,insertMethod,nvarchar(255),"The way this component was included in the presentation such as Shared, Reference, Dynamic, or External",,,,staging,,
-generatedLivedocComponents,format,nvarchar(255),The format of content that was inserted via upload (will be null for all other components),,,,staging,,
-generatedLivedocOutputs,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
-generatedLivedocOutputs,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this data belongs to,generatedLivedocs,id,,staging,,
-generatedLivedocOutputs,format,nvarchar(255),"The format of the generated livedoc (pdf, pptx, docx, excel)",,,,staging,,
-generatedLivedocOutputs,name,nvarchar(max),The display name for the generated livedoc (used when showing the generated livedoc in our product UI),,,,staging,,
-generatedLivedocOutputs,filename,nvarchar(max),The file name of the generated livedoc that user can deliver,,,,staging,,
-generatedLivedocOutputs,size,integer,The file size in bytes for the generated livedoc,,,,staging,,
-generatedLivedocOutputs,imageDPI,integer,The image DPI settings of the generated livedoc,,,,staging,,
-generatedLivedocOutputs,clearNotes,boolean,Whether the document was generated with notes or notes cleared,,,,staging,,
-generatedLivedocOutputs,outputLayout,nvarchar(max),The PDF output layout of Full Page Slides or Note Pages,,,,staging,,
-generatedLivedocOutputs,compatibility,nvarchar(max),The Acrobat version the PDF is designed for,,,,staging,,
-generatedLivedocOutputs,hasOpenPassword,boolean,Boolean indicating if the PDF requires a password to open,,,,staging,,
-generatedLivedocOutputs,hasOwnerPassword,boolean,Boolean indicating if the PDF has a password to allow modifications,,,,staging,,
-generatedLivedocOutputs,hasOwnerOptions,boolean,Boolean indicating if the PDF is set to limit the options the owner can change on the unlocked PDF,,,,staging,,
-groupMembers,id,uniqueidentifier,The primary id for items in this table representing a user's assignment to a particular group,,,,staging,,
-groupMembers,groupId,uniqueidentifier,The id of the group that this member belongs to,groups,id,,staging,,
-groupMembers,groupName,nvarchar(255),The name of the group,,,,staging,,
-groupMembers,userId,uniqueidentifier,The id of the user,users,id,,staging,,
-groups,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
-groups,name,nvarchar(255),The name of the group,,,,staging,,
-libraryContents,id,uniqueidentifier,The unique indentifier for a given document in the ControlCenter/ContentManager library,contents,id,,prod,primary,1to1
-libraryContents,name,nvarchar(255),The name of the document in the ControlCenter/ContentManager library,,,,prod,,
-libraryContents,version,nvarchar(255),The version number of the latest version of the document such as 5.3,,,,prod,,
-libraryContents,createdAt,datetime,The datetime that this document was created,,,,prod,,
-libraryContents,modifiedAt,datetime,The datetime that this document had any form of modification.  This is typically only used by machines and is not relevant for a person's perception of the last change to the document.,,,,prod,,
-libraryContents,latestLibraryContentVersionId,uniqueidentifier,The libraryContentVersionId for the latest version of this document,libraryContentVersions,id,,prod,informational,1to1
-libraryContents,latestLibraryContentVersionSize,integer,The size in bytes for the latest version of this document,,,,prod,,
-libraryContents,latestLibraryContentVersionCreatedAt,datetime,"The creation date for the latest version of this document, this is what most people think of when they ask 'when was this last updated'",,,,prod,,
-libraryContents,libraryUrl,nvarchar(max),The URL to this document in the library,,,,prod,,
-libraryContents,newsCenterUrl,nvarchar(max),The URL to this document in web NewsCenter,,,,prod,,
-libraryContents,docCenterUrl,nvarchar(max),The URL to this document in web DocCenter,,,,prod,,
-libraryContents,format,nvarchar(255),The format of this document,,,,prod,,
-libraryContents,teamsiteId,uniqueidentifier,The id of the teamsite this document exists in,teamsites,id,,prod,primary,Nto1
-libraryContents,teamsiteName,nvarchar(255),The name of the teamsite this document exists in,,,,roadmap,,
-libraryContents,isDeleted,boolean,Boolean indicating if this content is deleted,,,,prod,,
-libraryContents,ownerId,uniqueidentifier,The id of the owner of this document,users,id,,prod,primary,Nto1
-libraryContents,ownerUsername,nvarchar(255),The username of the owner of this document,,,,roadmap,,
-libraryContents,isPublished,boolean,Boolean indicating if any version of this document is published,,,,prod,,
-libraryContents,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,prod,,
-libraryContents,publishedVersionExpiresAt,datetime,The expiration date of the latest published version,,,,prod,,
-libraryContents,properties,json,This is an object that contains all of the content properties for this document,,,,prod,,
-libraryContents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of the library content,,,,tbd,,
-libraryContents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of the library content,,,,tbd,,
-libraryContentVersions,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
-libraryContentVersions,name,nvarchar(255),The name of the library content,,,,opdb,,
-libraryContentVersions,libraryContentId,uniqueidentifier,The id of the library content this is a version of,libraryContents,id,,opdb,primary,Nto1
-libraryContentVersions,createdBy,uniqueidentifier,The user id of the user who created this version,users,id,,opdb,primary,Nto1
-libraryContentVersions,size,integer,The size in bytes of this version of the content,,,,opdb,,
-libraryContentVersions,createdAt,datetime,The datetime that this version was created,,,,opdb,,
-libraryContentVersions,modifiedAt,datetime,The datetime that this version was modified,,,,opdb,,
-libraryContentVersions,version,nvarchar(255),The version number of this version such as 4.0,,,,opdb,,
-libraryContentVersions,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,tbd,,
-libraryContentVersions,isPublished,boolean,A boolean indicating if this version is the published version,,,,opdb,,
-libraryContentVersions,isExpired,boolean,A boolean indicating if this version is expired,,,,opdb,,
-libraryContentVersions,expiresAt,datetime,The datetime that this version expires,,,,opdb,,
-libraryContentVersions,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image for this library content version,,,,tbd,,
-libraryContentVersions,previewImageId,uniqueidentifier,An id to the higher resolution preview image for this library content version,,,,tbd,,
-livedocGenerationHistory,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-livedocGenerationHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this event generated,generatedLivedocs,id,,tbd,primary,1to1
-livedocGenerationHistory,occurredAt,datetime,The datetime that this livedoc was generated,,,,tbd,,
-livedocGenerationHistory,createdBy,uniqueidentifier,The user id of the user who generated this livedoc,users,id,,tbd,primary,Nto1
-livedocGenerationHistory,libraryContentId,uniqueidentifier,The library content id that this livedoc is based on,libraryContents,id,,tbd,informational,Nto1
-livedocGenerationHistory,libraryContentVersionId,uniqueidentifier,The library content version id that this livedoc is based on,libraryContentVersions,id,,tbd,informational,Nto1
-livedocGenerationHistory,workspaceContentId,uniqueidentifier,The workspace content id that was the starting point for this generated livedoc,workspaceContents,id,,tbd,informational,Nto1
-livedocGenerationHistory,workspaceContentVersionId,uniqueidentifier,The workspace content version id that was the starting point for this generated livedoc,workspaceContentVersions,id,,tbd,informational,Nto1
-livedocGenerationHistory,contentProfileId,uniqueidentifier,The content profile that this livedoc was generated from.  This is not included for livedocs generated in workspace.,contentProfiles,id,,tbd,primary,Nto1
-livedocGenerationHistory,productArea,,The product area where this livedoc was generated from,,,,tbd,,
-livedocGenerationHistory,application,,The application that this livedoc was generated from,,,,tbd,,
-livesendLinkContents,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
-livesendLinkContents,name,,The name of the document in the livesend link,,,,prod,,
-livesendLinkContents,livesendLinkId,uniqueidentifier,The id of the livesend link that this content is included in,livesendLinks,id,,prod,primary,Nto1
-livesendLinkContents,totalPages,integer,The total number of pages in this document,,,,prod,,
-livesendLinkContents,url,,The url to a specific document in a livesend link,,,,notpossible,,
-livesendLinkContents,createdAt,datetime,The datetime that the content was added to the livesend link,,,,prod,,
-livesendLinkContents,createdBy,uniqueidentifier,The user id of the user who created the livesend link,,,,prod,,
-livesendLinkContents,modifiedAt,datetime,"The datetime that this content was modified, this is used purely for ETL purposes and is typically the same as the createdAt date",,,,prod,,
-livesendLinkMembers,livesendLinkId,uniqueidentifier,The id of the livesend link that this content is included in,livesendLinks,id,,prod,primary,Nto1
-livesendLinkMembers,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,roadmap,primary,Nto1
-livesendLinkMembers,internalUserId,uniqueidentifier,"The id of the user if a user with this email address was found in the users table.  In the case that more than one user was found, one of them will be chosen at random.",users,id,,tbd,primary,Nto1
-livesendLinkMembers,createdAt,datetime,The datetime that the link member was added to the livesend link,,,,prod,,
-livesendLinkMembers,modifiedAt,datetime,"The datetime that this link member was modified, this is used purely for ETL purposes and is typically the same as the createdAt date",,,,prod,,
-livesendLinkMembers,email,,The email address of the link member,,,,prod,,
-livesendLinks,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
-livesendLinks,url,,The url of the livesend link,,,,roadmap,,
-livesendLinks,isSeparateSend,boolean,"A boolean indicating if the link was generated as the result of a ""blast email"" which creates many links or if the link is a shared link across many recipients",,,,prod,,
-livesendLinks,trackingCode,,The tracking code entered by the user when generating the livesend link,,,,roadmap,,
-livesendLinks,createdAt,datetime,The datetime that the livesend link was created,,,,prod,,
-livesendLinks,createdBy,uniqueidentifier,The user id of the user who created the livesend link,users,id,,prod,primary,Nto1
-livesendLinks,emailId,uniqueidentifier,The id of the email that this link was sent as a part of,emails,id,,tbd,primary,Nto1
-livesendLinks,modifiedAt,datetime,The datetime that the livesend link was modified,,,,roadmap,,
-livesendLinks,modifiedBy,uniqueidentifier,The user id of the user who modified the livesend link,users,id,,roadmap,primary,Nto1
-livesendLinks,deletedAt,datetime,The datetime that the livesend link was deleted,,,,roadmap,,
-livesendLinks,deletedBy,uniqueidentifier,The user id of the user who deleted the livesend link,users,id,,roadmap,primary,Nto1
-livesendLinks,allowDownload,boolean,LiveSend Setting - is content downloadable,,,,roadmap,,
-livesendLinks,expireAfterView,boolean,LiveSend Setting - allow single view of livesend,,,,roadmap,,
-livesendLinks,expiresAt,datetime,LiveSend Setting - when the LiveSend link expires,,,,roadmap,,
-livesendLinks,password,nvarchar(50),LiveSend Setting - password set for link,,,,roadmap,,
-livesendLinks,notificationSetting,integer,LiveSend Setting - notification setting for link,,,,roadmap,,
-livesendLinks,clientApp,nvarchar(50),Application used to created link,,,,tbd,,
-livesendLinks,clientId,uniqueidentifier,Unique Id for application used to create link,,,,tbd,,
-livesendLinks,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
-livesendLinks,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
-livesendLinks,legacyInvitationId,uniqueidentifier,The (legacy) invitationId for the link,,,,internal,,
-livesendLinkDeliveries,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-livesendLinkDeliveries,livesendLinkId,uniqueidentifier,The id of the livesend link that this delivery goes to,livesendLinks,id,,tbd,primary,Nto1
-livesendLinkDeliveries,deliveryId,uniqueidentifier,The id of the delivery that this link was sent to,deliveries,id,,tbd,primary,Nto1
-livesendLinkDeliveries,systemCreatedAt,datetime,datetime row was created,,,,tbd,,
-livesendLinkDeliveries,systemModifiedAt,datetime,datetime row was modified,,,,tbd,,
-livesendPageViews,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
-livesendPageViews,livesendLinkContentId,uniqueidentifier,The id of the livesend link content that the page view occurred on,livesendLinkContents,id,,prod,primary,Nto1
-livesendPageViews,contentVersionId,uniqueidentifier,The link that this maps the page view to a specific version of the content (useful for when we can/will update content),content,id,,roadmap,primary,Nto1
-livesendPageViews,occurredAt,datetime,The datetime that the page view occurred,,,,prod,,
-livesendPageViews,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,prod,,
-livesendPageViews,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,prod,,
-livesendPageViews,duration,integer,The number of milliseconds spent viewing the page until the next event occurs.,,,,prod,,
-livesendPageViews,livesendViewingSessionId,uniqueidentifier,The id of the livesend viewing session that this page view is a part of,livesendViewingSession,id,,prod,primary,Nto1
-livesendPageViews,legacyLivesendContentId,uniqueidentifier,"[INTERNAL] This is the livesendContentId from the operational database, for reference only.",,,,internal,,
-livesendPageViews,pageIndex,integer,The 1-N based page number that was viewed,,,,prod,,
-livesendPageViews,thumbnailImageId,uniqueidentifier,The id for the thumbnail,,,,tbd,,
-livesendViewingSession,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
-livesendViewingSession,livesendLinkId,uniqueidentifier,The id of the livesend link that this session is acting on,livesendLinks,id,,tbd,primary,Nto1
-livesendViewingSession,externalUserId,uniqueidentifier,Id for External User who viewed link,externalUsers,id,,roadmap,primary,Nto1
-livesendViewingSession,viewDetails,json,[TBD] We may want some form of summary of the session? Maybe as multiple fields not a JSON object.,,,,tbd,,
-livesendViewingSession,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,roadmap,,
-livesendViewingSession,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,roadmap,,
-livesendViewingSession,status,nvarchar(50),"session status: sessionStarted, sessionEnded",,,,roadmap,,
-livesendViewingSession,legacySessionId,uniqueidentifier,Unique Id for the session in the LiveShare DB,,,,internal,,
-livesendViewingSession,locationAnonymized,boolean,"If true, IP address has not been recorded (or we've used IP for server - TBD)",,,,internal,,
-livesendViewingSession,validSession,boolean,"True when we believe this was a ""real view"" (as opposed to virus scan, etc)",,,,roadmap,,
-livesendViewingSession,domain,nvarchar(255),Domain of the IP used to view (based on lookup),,,,roadmap,,
-livesendViewingSession,ipAddress,nvarchar(50),IP Address of view session,,,,roadmap,,
-livesendViewingSession,cookieId,nvarchar(255),A uniqueId specified by cookie,,,,roadmap,,
-livesendViewingSession,cookieType,nvarchar(50),"(Right now) Either ""SeismicUser"" or ""PublicUser""",,,,roadmap,,
-livesendViewingSession,userAgent,nvarchar(255),UserAgent of view session,,,,roadmap,,
-livesendViewingSession,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
-livesendViewingSession,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
-searchClicks,id,uniqueidentifier,The primary id for events in this table,referrerEvents,id,,roadmap,primary,1to1
-searchClicks,type,nvarchar(255),"Whether the click leads to a view, preview, or delivery",,,,tbd,,
-searchClicks,searchHistoryId,uniqueidentifier,The id of the search history that this click happened in,searchHistory,id,,roadmap,primary,Nto1
-searchClicks,clickNumber,integer,The number of the click in the searchHistoryId in cases where the user clicks on many documents within a single set of search results,,,,tbd,,
-searchClicks,viewMode,nvarchar(255),"The view mode (list, card, tile, or typeahead view) the user was in when they clicked on a document",,,,roadmap,,
-searchClicks,currentPage,integer,The current page of the search when the click happened (pages numbered from 1),,,,roadmap,,
-searchClicks,resultRank,integer,The index of the item in the result list relative to the first item on page 1 (results numbered from 1).  ,,,,roadmap,,
-searchClicks,activeScope,nvarchar(255),"Which scope (DocCenter, Workspace, ContentManager, or All) the user has active when they click on a document",,,,roadmap,,
-searchClicks,contentId,uniqueidentifier,The content id of the content that the click occurred on,,,,internal,,
-searchClicks,contentVersionId,uniqueidentifier,The content version id of the content that the click occurred on,,,,internal,,
-searchClicks,instanceName,nvarchar(255),The name of the document or folder that was clicked,,,,roadmap,,
-searchClicks,occurredAt,datetime,The datetime that the click occurred at,,,,roadmap,,
-searchClicks,isFolder,boolean,A boolean indicating if the click was on a folder,,,,roadmap,,
-searchClicks,userId,uniqueidentifier,The id of the user who did the click,,,,roadmap,,
-searchClicks,application,nvarchar(255),The application that the click took place in,,,,roadmap,,
-searchClicks,productArea,nvarchar(255),"The product area that the click occurred in.  i.e. if you search from homepage, the productArea should be homepage.  Only when you are on the ""search"" page should the product area be ""search""",,,,tbd,,
-landingPageClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
-homepageClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
-articleClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
-folderNavigateClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
-pushNotificationClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
-universalLinkClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
-searchFacets,searchHistoryId,uniqueidentifier,The id of the search history that this facet acted on,searchHistory,id,,roadmap,primary,Nto1
-searchFacets,contentPropertyId,uniqueidentifier,The id of the content property that this facet is based on,contentProperties,id,,roadmap,informational,Nto1
-searchFacets,contentPropertyName,,The name of the content property that this facet is based on,,,,roadmap,,
-searchFacets,contentPropertyValue,,The value of the content property that this facet is applying,,,,roadmap,,
-searchHistory,id,uniqueidentifier,"The primary id for events in this table.  Represents a change in search term or facets, but does not change across pages.",,,,prod,,
-searchHistory,searchTermRaw,,The search term as entered by the user,,,,prod,,
-searchHistory,searchTermNormalized,,The search term converted to lowercase and all special characters replaced by their ASCII equivalent,,,,prod,,
-searchHistory,searchCycleId,uniqueidentifier,An id for the combined cycle of steps for search and filter,,,,prod,,
-searchHistory,searchType,,Keyword Search or Facet Search,,,,prod,,
-searchHistory,occurredAt,datetime,The timestamp that the search occurred,,,,prod,,
-searchHistory,userId,uniqueidentifier,The id of the user who performed the search,users,id,,prod,primary,Nto1
-searchHistory,resultCount,integer,The total number of results returned by the search,,,,prod,,
-searchHistory,resultCountDocCenter,integer,The total number of DocCenter results returned by the search,,,,prod,,
-searchHistory,resultCountNewsCenter,integer,The total number of NewsCenter results returned by the search,,,,prod,,
-searchHistory,resultCountContentManager,integer,The total number of ContentManager results returned by the search,,,,prod,,
-searchHistory,resultCountControlCenter,integer,The total number of ControlCenter results returned by the search,,,,prod,,
-searchHistory,resultCountWorkspace,integer,The total number of Workspace results returned by the search,,,,prod,,
-searchHistory,selectedFacets,,A JSON object representing key value pairs of properties and selected values,,,,prod,,
-searchHistory,sortBy,,"What the search is sorted by, Relevance or Last Modified",,,,prod,,
-searchHistory,application,,The application where the search was performed,,,,tbd,,
-searchHistory,duration,integer,[INTERNAL ONLY] Duration in milliseconds it took for the search to return results,,,,internal,,
-searchHistory,scope,,"A JSON object represting the product area and folder scope of the search such as {""productArea"" : [""DocCenter""], ""folder"" : {""path"" : ""/profile/folder name/"", ""id"" : ""folder Id""}}",,,,tbd,,
-searchHistory,searchEngine,,"The search engine used ie. Azure, elastic",,,,internal,,
-searchHistory,searchEngineVersion,,Search engine version used ie. V2_2018,,,,internal,,
-searchWords,searchHistoryId,uniqueidentifier,The id of the search history these words are from,searchHistory,id,,staging,primary,Nto1
-searchWords,word,,A single word from the search term,,,,staging,,
-searchWords,searchCycleId,uniqueidentifier,An id for the combined cycle of steps for search and filter,,,,staging,,
-searchWords,occurredAt,datetime,The timestamp that the search occurred,,,,staging,,
-teamsites,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
-teamsites,name,,The name of the teamsite,,,,staging,,
-userLoginHistory,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
-userLoginHistory,occurredAt,datetime,The datetime that this login occurred,,,,opdb,,
-userLoginHistory,userId,uniqueidentifier,The id of the user who logged in,users,id,,opdb,primary,Nto1
-userLoginHistory,application,,The application the user was using when they logged in,,,,opdb-dirty,,
-userProperties,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
-userProperties,name,,The name of the user property,,,,staging,,
-userProperties,type,,"The type of the user property (string, integer, date, boolean, float)",,,,staging,,
-userPropertyAssignments,userId,uniqueidentifier,The id of the user that this property applies to,users,id,,staging,primary,Nto1
-userPropertyAssignments,userPropertyId,uniqueidentifier,The id of the user property,userProperties,id,,staging,primary,Nto1
-userPropertyAssignments,userPropertyName,,The name of the user property,,,,staging,,
-userPropertyAssignments,userPropertyType,,"The type of the user property (string, integer, date, boolean, float)",,,,staging,,
-userPropertyAssignments,userPropertyValue,,One of the values assigned to the given user for this user property,,,,staging,,
-userPropertyValues,value,,The one of values for a given user property,,,,opdb,,
-userPropertyValues,userPropertyId,uniqueidentifier,The id of the user property that this value belongs to,userProperties,id,,opdb,primary,Nto1
-userPropertyValues,userPropertyName,,The name of the user property that this value belongs to,,,,opdb,,
-userPropertyValues,userPropertyType,,The type of the user property that this value belongs to,,,,opdb,,
-users,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
-users,ssoUserId,,The single sign-on id for the user,,,,opdb,,
-users,username,,The user's username,,,,prod,,
-users,email,,The user's email address,,,,prod,,
-users,emailDomain,,The user's email address domain such as seismic.com,,,,prod,,
-users,fullName,,The user's full name,,,,prod,,
-users,firstName,,The user's first name or given name,,,,prod,,
-users,lastName,,The user's last name or surname,,,,prod,,
-users,createdAt,datetime,The timestamp when the user record was created,,,,prod,,
-users,modifiedAt,datetime,The timestamp when the user record was last modified,,,,prod,,
-users,deletedAt,datetime,The timestamp when the user record was marked deleted,,,,prod,,
-users,organization,,The user's organization,,,,prod,,
-users,title,,The user's title,,,,prod,,
-users,isDeleted,boolean,A flag indicating if the user is currently considered deleted,,,,prod,,
-users,licenseType,,"The license type for the user such as premium, business, or partner",,,,prod,,
-users,isSeismicEmployee,boolean,A flag indicating if the user is a Seismic employee,,,,prod,,
-users,isSystemAdmin,boolean,A flag indicating if the user has system administration permissions,,,,opdb-difficult,,
-users,defaultContentProfileId,uniqueidentifier,The id of the users default content profile,,,,prod,,
-users,defaultContentProfileName,,The name of the users default content profile,,,,roadmap,,
-users,groups,json,A JSON object representing the list of groups the user is a member of,,,,prod,,
-users,properties,json,A JSON object representing list of properties and values for the user,,,,prod,,
-workspaceComments,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
-workspaceComments,commentText,,The plain text version of the comment,,,,opdb,,
-workspaceComments,commentHTML,,The full HTML of the comment including styling and mentions,,,,opdb,,
-workspaceComments,createdBy,uniqueidentifier,The user id of the user who made the comment,users,id,,opdb,primary,Nto1
-workspaceComments,workspaceContentId,uniqueidentifier,The workspace content id of the content that the comment was made on,workspaceContents,id,,opdb,,
-workspaceComments,workspaceContentVersionId,uniqueidentifier,The workspace content version id of the content that the comment was made on,workspaceContentVersions,id,,opdb,,
-workspaceComments,pageIndex,integer,The 1-N based page number where the annotation was placed,,,,opdb,,
-workspaceComments,annotationType,,"The type of annotation (rectange, oval, pin, line) the comment is associated with",,,,opdb,,
-workspaceContents,id,uniqueidentifier,The primary id for items in this table,contents,id,,prod,primary,1to1
-workspaceContents,name,,The name of the content,,,,prod,,
-workspaceContents,createdBy,uniqueidentifier,The user id of the user who created the first version of this content in workspace,users,id,,prod,primary,Nto1
-workspaceContents,createdAt,datetime,The datetime that the first version of this content was created in Workspace,,,,prod,,
-workspaceContents,modifiedAt,datetime,The datetime that this content was last altered in any way,,,,prod,,
-workspaceContents,isDeleted,boolean,A boolean indicating if this content has been deleted from Workspace,,,,prod,,
-workspaceContents,latestWorkspaceContentVersionId,uniqueidentifier,The workspace version id of the highest version,workspaceContentVersions,id,,prod,informational,1to1
-workspaceContents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the highest version was created,,,,prod,,
-workspaceContents,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,prod,,
-workspaceContents,isFolder,boolean,A boolean indicating if this content is a folder,,,,prod,,
-workspaceContents,isCartContent,boolean,A boolean indicating if this is content in a user's document cart (which is a specialzed hidden workspace folder),,,,prod,,
-workspaceContents,libraryContentId,uniqueidentifier,The library content id that this workspace content originated from,libraryContents,id,,prod,informational,Nto1
-workspaceContents,version,,The current version number of this document in workspace,,,,prod,,
-workspaceContents,materializedPath,,The full path of workspaceContentIds representing the parent folder path to this workspace content,,,,prod,,
-workspaceContents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of the workspace content,,,,tbd,,
-workspaceContents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of the workspace content,,,,tbd,,
-workspaceContentVersions,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
-workspaceContentVersions,workspaceContentId,uniqueidentifier,The id of the workspace content that this is a version of,workspaceContents,id,,opdb,primary,Nto1
-workspaceContentVersions,name,,The name of the workspace content that this is a version of,,,,opdb,,
-workspaceContentVersions,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,opdb,,
-workspaceContentVersions,isLiveSendStorage,boolean,[INTERNAL] Boolean indicating if this is hidden storage used by Livesend when performing livesend from DocCenter,,,,internal,,
-workspaceContentVersions,isFolder,boolean,A boolean indicating if this content is a folder,,,,opdb,,
-workspaceContentVersions,isCartContent,boolean,A boolean indicating if this is content in a user's document cart (which is a specialzed hidden workspace folder),,,,opdb,,
-workspaceContentVersions,isVirtualSharingNode,boolean,[INTERNAL] Boolean indicating if this is a virtual node in a user's workspace that represents a link to the physical folder or content,,,,internal,,
-workspaceContentVersions,internalTypeCode,integer,[INTERNAL] The internal type code for this content type in workspace,,,,internal,,
-workspaceContentVersions,versionCreationMethod,,"The approach used to create this version of the workspace document (Add to Cart, Save to Workspace, Auto-update, Livedoc Iteration, Upload)",,,,opdb,,
-workspaceContentVersions,libraryContentId,uniqueidentifier,The library content id that this content is derived from,libraryContents,id,,opdb-dirty,informational,Nto1
-workspaceContentVersions,libraryContentVersionId,uniqueidentifier,"The library content version id that this particular version is derived from.  If this version is the result of an upload, the library version id is retained from the last version created directly from the library",libraryContentVersions,id,,opdb-dirty,informational,Nto1
-workspaceContentVersions,createdAt,datetime,The datetime that this version was created,,,,opdb,,
-workspaceContentVersions,createdBy,uniqueidentifier,"The user id of the user who created this version.  In the case of auto-update, this is the owner of the library content.",users,id,,opdb,primary,Nto1
-workspaceContentVersions,version,,The version number of this version of the workspace content,,,,opdb,,
-workspaceContentVersions,format,,The format of this version of the workspace content,,,,opdb,,
-workspaceContentVersions,size,integer,The size in bytes of this version of the workspace content,,,,opdb,,
-workspaceContentVersions,materializedPath,,The full path of workspaceContentIds representing the parent folder path to this workspace content,,,,opdb,,
-workspaceContentVersions,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image for this workspace content version,,,,opdb,,
-workspaceContentVersions,previewImageId,uniqueidentifier,An id to the higher resolution preview image for this workspace content version,,,,opdb,,
-meetings,id,uniqueidentifier,The id of the meeting,,,,tbd,,
-meetings,url,nvarchar(max),The url of the meeting,,,,tbd,,
-meetings,roomId,nvarchar(255),An id representing the persistent room available at the meeting's URL,,,,tbd,,
-meetings,createdBy,uniqueidentifier,The user id of the user who created the meeting,,,,tbd,,
-meetings,startedAt,datetime,The timestamp when the meeting started,,,,tbd,,
-meetings,endedAt,datetime,The timestamp when the meeting ended,,,,tbd,,
-meetings,screenShareDuration,bigint,Total screen share duration from all participants in seconds,,,,tbd,,
-meetings,meetingDuration,bigint,Total meeting duration in seconds,,,,tbd,,
-meetings,totalMembers,integer,Total number of members that attended the meeting,,,,tbd,,
-meetingMembers,id,uniqueidentifier,The id of the meeting member,,,,tbd,,
-meetingMembers,meetingId,uniqueidentifier,The id of the meeting this member participated in,meetings,id,,tbd,primary,Nto1
-meetingMembers,isModerator,boolean,Boolean indicating if this member is the moderator of the meeting,,,,tbd,,
-meetingMembers,screenShareDuration,bigint,Total screen share duration from this member in seconds,,,,tbd,,
-meetingMembers,internalUserId,uniqueidentifier,The user id of the member if they are a registered user of the seimic platform,users,id,,tbd,primary,Nto1
-meetingMembers,internalUserEmail,nvarchar(max),The email address of the internal user,,,,tbd,,
-meetingMembers,internalUserUsername,nvarchar(max),The username of the internal user,,,,tbd,,
-meetingMembers,joinedAt,datetime,The timestamp when the member first joined the meeting,,,,tbd,,
-meetingMembers,exitedAt,datetime,The timestamp when the member last exited the meeting,,,,tbd,,
-meetingMembers,totalDuration,bigint,The total duration in seconds that the member was in the meeting,,,,tbd,,
-meetingMembers,surveyRating,integer,The 1 to 5 rating provided by the member,,,,tbd,,
-meetingMembers,surveyFeedback,nvarchar(max),The plain text feedback on the meeting from the member,,,,tbd,,
 crmAccounts,crmOrganizationId,uniqueidentifier,The id of the crmOrganization that the account belongs to.,crmOrganizations,id,,staging,primary,Nto1
 crmAccounts,description,nvarchar(max),The description of the account as specified in the external system.,,,,staging,,
 crmAccounts,domain,nvarchar(253),The domain to which the majority of the account's contact's email addresses belong.,,,,staging,,
 crmAccounts,externalSystemCreatedAt,datetime,The date and time the account was created according to the external system.,,,,staging,,
 crmAccounts,externalSystemId,nvarchar(128),The id of the account according to the external system.,,,,staging,,
-crmAccounts,externalSystemOwnerId,nvarchar(128),The id of the user that is the owner of the account according to the external system.,,,,staging,,
 crmAccounts,externalSystemModifiedAt,datetime,The date and time the account was last updated according to the external system.,,,,staging,,
+crmAccounts,externalSystemOwnerId,nvarchar(128),The id of the user that is the owner of the account according to the external system.,,,,staging,,
 crmAccounts,id,uniqueidentifier,The unique identifier for the account.,,,,staging,,
 crmAccounts,industry,nvarchar(256),The industry of the account as specified in the external system.,,,,staging,,
 crmAccounts,industryNormalized,nvarchar(128),"The best available, normalized industry that the account belongs to.",,,,staging,,
 crmAccounts,industryNormalizedCustomer,nvarchar(128),The normalized industry that the account belongs to based on the customer's industry selection.,,,,staging,,
+crmAccounts,modifiedAt,datetime,The date and time the crmAccount record was last updated.,,,,staging,,
 crmAccounts,name,nvarchar(256),The name of the account as specified in the external system.,,,,staging,,
 crmAccounts,ownerCrmUserId,uniqueidentifier,The id of the crmUser that is designated as the owner of the account.,crmUsers,id,,staging,primary,Nto1
 crmAccounts,type,nvarchar(256),The type of the account as specified in the external system.,,,,staging,,
-crmAccounts,modifiedAt,datetime,The date and time the crmAccount record was last updated.,,,,staging,,
 crmContacts,businessFunction,nvarchar(64),The business function of the contact as specified in the external system.,,,,staging,,
 crmContacts,company,nvarchar(256),The company of the contact as specified in the external system.,,,,staging,,
 crmContacts,crmAccountId,uniqueidentifier,The id of the crmAccount that the contact is associated with.,crmAccounts,id,,staging,primary,Nto1
@@ -410,13 +138,13 @@ crmContacts,industryNormalized,nvarchar(128),"The best available, normalized ind
 crmContacts,industryNormalizedCustomer,nvarchar(128),The normalized industry that the contact belongs to based on the industry selection in the external system.,,,,staging,,
 crmContacts,isInternal,boolean,Indicates whether the contact is internal to the organization or not.,,,,staging,,
 crmContacts,lastName,nvarchar(128),The last name of the contact as specified in the external system.,,,,staging,,
+crmContacts,modifiedAt,datetime,The date and time the the crmContact was last updated.,,,,staging,,
 crmContacts,name,nvarchar(256),The full name of the contact as specified in the external system.,,,,staging,,
 crmContacts,title,nvarchar(256),The title of the contact as specified in the external system.,,,,staging,,
-crmContacts,modifiedAt,datetime,The date and time the the crmContact was last updated.,,,,staging,,
 crmContentUsageHistoryMappings,contentUsageHistoryId,uniqueidentifier,The id of the contentUsageHistory record that the given crm context maps to.,contentUsageHistory,id,,staging,primary,Nto1
 crmContentUsageHistoryMappings,crmContactId,uniqueidentifier,The id of the crmContact record that the contentUsageHistory record maps to.,crmContacts,id,,staging,primary,Nto1
-crmContentUsageHistoryMappings,crmOrganizationId,uniqueidentifier,The id of the crmOrganization record that the contentUsageHistory record maps to.,crmOrganizations,id,,staging,primary,Nto1
 crmContentUsageHistoryMappings,crmLeadId,uniqueidentifier,The id of the crmLead record that the contentUsageHistory record maps to.,crmLeads,id,,staging,primary,Nto1
+crmContentUsageHistoryMappings,crmOrganizationId,uniqueidentifier,The id of the crmOrganization record that the contentUsageHistory record maps to.,crmOrganizations,id,,staging,primary,Nto1
 crmContentUsageHistoryMappings,crmSalesTimelinePeriodId,uniqueidentifier,The id of the crmSalesTimelinePeriod that the contentUsageHistory record maps to.,crmSalesTimelinePeriods,id,,staging,primary,Nto1
 crmContentUsageHistoryMappings,id,uniqueidentifier,The unique identifier for the crmContentUsageHistoryMapping record.,,,,staging,,
 crmContentUsageHistoryMappings,modifiedAt,datetime,The date and time that the crmContentUsageHistoryMapping was last updated.,,,,staging,,
@@ -430,8 +158,8 @@ crmLeads,department,nvarchar(128),The department of the lead as specified in the
 crmLeads,description,nvarchar(max),The description of the lead as specified in the external system.,,,,staging,,
 crmLeads,email,nvarchar(254),The email address of the lead as specified in the external system.,,,,staging,,
 crmLeads,externalSystemConvertedAccountId,nvarchar(128),The id of the account that the lead converted to according to the external system.,,,,staging,,
-crmLeads,externalSystemConvertedContactId,nvarchar(128),The id of the contact that the lead converted to according to the external system.,,,,staging,,
 crmLeads,externalSystemConvertedAt,datetime,The date and time that the lead converted according to the external system.,,,,staging,,
+crmLeads,externalSystemConvertedContactId,nvarchar(128),The id of the contact that the lead converted to according to the external system.,,,,staging,,
 crmLeads,externalSystemConvertedOpportunityId,nvarchar(128),The id of the opportunity that the lead converted to according to the external system.,,,,staging,,
 crmLeads,externalSystemCreatedAt,datetime,The date and time that the lead was created according to the external system.,,,,staging,,
 crmLeads,externalSystemId,nvarchar(128),The id of the lead record according to the external system.,,,,staging,,
@@ -443,9 +171,9 @@ crmLeads,industryNormalized,nvarchar(128),"The best available, normalized indust
 crmLeads,industryNormalizedCustomer,nvarchar(128),The normalized industry that the lead belongs to based on the industry selection in the external system.,,,,staging,,
 crmLeads,isInternal,boolean,Indicates whether the lead is internal to the organization or not.,,,,staging,,
 crmLeads,lastName,nvarchar(128),The last name of the lead as specified in the external system.,,,,staging,,
+crmLeads,modifiedAt,datetime,The date and time the the crmLead was last updated.,,,,staging,,
 crmLeads,name,nvarchar(256),The full name of the lead as specified in the external system.,,,,staging,,
 crmLeads,title,nvarchar(256),The title of the lead as specified in the external system.,,,,staging,,
-crmLeads,modifiedAt,datetime,The date and time the the crmLead was last updated.,,,,staging,,
 crmOpportunities,amount,"decimal(19,4)",The projected value of the opportunity in USD.,,,,staging,,
 crmOpportunities,amountRaw,"decimal(19,4)",The projected value of the opportunity in the currency specified by currencyCode as specified in the external system.,,,,staging,,
 crmOpportunities,crmAccountId,uniqueidentifier,The id of the crmAccount that the opportunity is associated with.,crmAccounts,id,,staging,primary,Nto1
@@ -453,56 +181,56 @@ crmOpportunities,crmOrganizationId,uniqueidentifier,The id of the crmOrganizatio
 crmOpportunities,currencyCode,nvarchar(3),The ISO currency code of the currency that amountRaw is given in as specified in the external system.,,,,staging,,
 crmOpportunities,currentCrmStageId,nvarchar(64),The name of the crmStage that the opportunity is currently in.,crmStages,id,,staging,primary,Nto1
 crmOpportunities,currentCrmStageName,nvarchar(64),The name of the crmStage that the opportunity is currently in.,,,,staging,,
-crmOpportunities,status,nvarchar(64),"Indicates the current state of the opportunity being active, won, or lost.",,,,staging,,
 crmOpportunities,description,nvarchar(max),The description of the opportunity as specified in the external system.,,,,staging,,
 crmOpportunities,externalSystemAccountId,nvarchar(128),The id of the account that the opportunity is associated with in the external system.,,,,staging,,
 crmOpportunities,externalSystemClosedAt,datetime,The close date of the opportunity as specified in the external system.,,,,staging,,
 crmOpportunities,externalSystemCreatedAt,datetime,The created date of the opportunity as specified in the external system.,,,,staging,,
 crmOpportunities,externalSystemId,nvarchar(128),The id of the opportunity in the external system.,,,,staging,,
-crmOpportunities,externalSystemOwnerId,nvarchar(128),The id of the user that is the owner of the opportunity according to the external system.,,,,staging,,
 crmOpportunities,externalSystemModifiedAt,datetime,The date and time that the opportunity was last updated according to the external system.,,,,staging,,
+crmOpportunities,externalSystemOwnerId,nvarchar(128),The id of the user that is the owner of the opportunity according to the external system.,,,,staging,,
 crmOpportunities,id,uniqueidentifier,The unique identifier of the crmOpportunity record.,,,,staging,,
+crmOpportunities,modifiedAt,datetime,The date and time that the crmOpportunity record was last updated.,,,,staging,,
 crmOpportunities,name,nvarchar(256),The name of the opportunity as specified in the external system.,,,,staging,,
 crmOpportunities,ownerCrmUserId,uniqueidentifier,The id of the crmUser that is designated as the owner of the opportunity.,crmUsers,id,,staging,primary,Nto1
+crmOpportunities,status,nvarchar(64),"Indicates the current state of the opportunity being active, won, or lost.",,,,staging,,
 crmOpportunities,type,nvarchar(256),The type of the opportunity as specified in the external system.,,,,staging,,
-crmOpportunities,modifiedAt,datetime,The date and time that the crmOpportunity record was last updated.,,,,staging,,
 crmOpportunityContacts,crmContactId,uniqueidentifier,The id of the crmContact record that is associated with the crmOpportunity specified by crmOpportunityId.,crmContacts,id,,staging,primary,Nto1
 crmOpportunityContacts,crmOpportunityId,uniqueidentifier,the id of the crmOpportunity record that is associated with the crmContact specified by crmContactId.,crmOpportunities,id,,staging,primary,Nto1
 crmOpportunityContacts,crmOrganizationId,uniqueidentifier,The id of the crmOrganization that the specified crmOpportunity and crmContact belong to.,crmOrganizations,id,,staging,primary,Nto1
 crmOpportunityContacts,externalSystemContactId,nvarchar(128),The id of the contact according to the external system.,,,,staging,,
 crmOpportunityContacts,externalSystemCreatedAt,datetime,The created date of the opportunity contact according to the external system.,,,,staging,,
 crmOpportunityContacts,externalSystemId,nvarchar(128),The id of the opportunity contact in the external system.,,,,staging,,
-crmOpportunityContacts,externalSystemOpportunityId,nvarchar(128),The id of the opportunity according to the external system.,,,,staging,,
 crmOpportunityContacts,externalSystemModifiedAt,datetime,The date and time that the record that represents the opportunity contact was updated according to the external system.,,,,staging,,
+crmOpportunityContacts,externalSystemOpportunityId,nvarchar(128),The id of the opportunity according to the external system.,,,,staging,,
 crmOpportunityContacts,id,uniqueidentifier,The unique identifier of the crmOpportunityContact record.,,,,staging,,
 crmOpportunityContacts,isPrimary,boolean,Boolean flag indicating whether the specified contact is the primary contact for the specified opportunity.,,,,staging,,
-crmOpportunityContacts,role,nvarchar(48),The role of the specified contact for the specified opportunity as specified in the external system.,,,,staging,,
 crmOpportunityContacts,modifiedAt,datetime,The date and time that the crmOpportunityContact record was last updated.,,,,staging,,
+crmOpportunityContacts,role,nvarchar(48),The role of the specified contact for the specified opportunity as specified in the external system.,,,,staging,,
 crmOrganizations,externalSystemCreatedAt,datetime,The created date of the organization according to the external system.,,,,staging,,
 crmOrganizations,externalSystemId,nvarchar(128),The id of the organization in the external system.,,,,staging,,
 crmOrganizations,externalSystemModifiedAt,datetime,The date and time the organization was last updated according to the external system.,,,,staging,,
 crmOrganizations,id,uniqueidentifier,The unique identifier of the crmOrganization record.,,,,staging,,
-crmOrganizations,name,nvarchar(256),The name of the organization as specified in the external system.,,,,staging,,
 crmOrganizations,modifiedAt,datetime,The date and time the crmOrganization record was last updated.,,,,staging,,
+crmOrganizations,name,nvarchar(256),The name of the organization as specified in the external system.,,,,staging,,
 crmSalesTimelinePeriods,closes,boolean,Boolean flag indicating whether the related opportunity closed during the sales timeline period.,,,,staging,,
 crmSalesTimelinePeriods,converts,boolean,Boolean flag indicating whether the related lead converts during the sales timeline period.,,,,staging,,
 crmSalesTimelinePeriods,crmLeadId,uniqueidentifier,The id of the crmLead record that the salesTimelinePeriod is associated with.,crmLeads,id,,staging,primary,Nto1
 crmSalesTimelinePeriods,crmOpportunityId,uniqueidentifier,The id of the crmOpportunity record that the salesTimelinePeriod is associated with.,crmOpportunities,id,,staging,primary,Nto1
 crmSalesTimelinePeriods,crmOrganizationId,uniqueidentifier,The id of the crmOrganization record that the salesTimelinePeriod is associated with.,crmOrganizations,id,,staging,primary,Nto1
+crmSalesTimelinePeriods,crmStageId,nvarchar(64),The id of the stage that the salesTimelinePeriod represents.,crmStages,id,,staging,primary,Nto1
+crmSalesTimelinePeriods,crmStageName,nvarchar(64),The name of the stage that the salesTimelinePeriod represents.,,,,staging,,
 crmSalesTimelinePeriods,endTime,datetime,The date and time that marks the end of the salesTimelinePeriod.,,,,staging,,
 crmSalesTimelinePeriods,externalSystemLeadId,nvarchar(128),The id of the lead record according to the external system.,,,,staging,,
 crmSalesTimelinePeriods,externalSystemOpportunityId,nvarchar(128),The id of the opportunity record according to the external system.,,,,staging,,
 crmSalesTimelinePeriods,externalSystemType,nvarchar(256),The type of record in the external system that the salesTimelinePeriod relates to. Values include 'lead' and 'opportunity'.,,,,staging,,
 crmSalesTimelinePeriods,id,uniqueidentifier,The unique identifier of the salesTimelinePeriod record.,,,,staging,,
-crmSalesTimelinePeriods,crmStageName,nvarchar(64),The name of the stage that the salesTimelinePeriod represents.,,,,staging,,
-crmSalesTimelinePeriods,crmStageId,nvarchar(64),The id of the stage that the salesTimelinePeriod represents.,crmStages,id,,staging,primary,Nto1
-crmSalesTimelinePeriods,nextCrmStageName,nvarchar(64),The name of the stage that the specified lead/opportunity moved to after the stage represented by the salesTimelinePeriod.,,,,staging,,
+crmSalesTimelinePeriods,modifiedAt,datetime,The date and time that the crmSalesTimelinePeriod record was updated.,,,,staging,,
 crmSalesTimelinePeriods,nextCrmStageId,nvarchar(64),The id of the stage that the specified lead/opportunity moved to after the stage represented by the salesTimelinePeriod.,crmStages,id,,staging,primary,Nto1
+crmSalesTimelinePeriods,nextCrmStageName,nvarchar(64),The name of the stage that the specified lead/opportunity moved to after the stage represented by the salesTimelinePeriod.,,,,staging,,
 crmSalesTimelinePeriods,progresses,boolean,Boolean flag indicating whether the salesTimelinePeriod constitutes deal progres.,,,,staging,,
+crmSalesTimelinePeriods,startTime,datetime,The date and time that marks the start of the salesTimelinePeriod.,,,,staging,,
 crmSalesTimelinePeriods,timelineId,uniqueidentifier,The id of the full timeline for the given combination of lead and opportunity spanning from lead through opportunity.,,,,staging,,
 crmSalesTimelinePeriods,timelineSortOrder,integer,The index of this timeline period in the overall sales timeline for the given combination of lead and opportunity.,,,,staging,,
-crmSalesTimelinePeriods,startTime,datetime,The date and time that marks the start of the salesTimelinePeriod.,,,,staging,,
-crmSalesTimelinePeriods,modifiedAt,datetime,The date and time that the crmSalesTimelinePeriod record was updated.,,,,staging,,
 crmSalesTimelinePeriods,wins,boolean,Boolean flag indicating whether the related opportunity is won during the salesTimelinePeriod.,,,,staging,,
 crmSalesTimelinePeriods,winsEventually,boolean,Boolean flag indicating whether the related opportunity eventually closes as a win.,,,,staging,,
 crmStages,crmOrganizationId,uniqueidentifier,The id of the crmOrganization that the stage belongs to.,crmOrganizations,id,,staging,primary,Nto1
@@ -510,10 +238,10 @@ crmStages,externalSystemId,nvarchar(128),The id of the stage according to the ex
 crmStages,externalSystemModifiedAt,datetime,The date and time that the stage record was updated according to the external system.,,,,staging,,
 crmStages,forecastCategory,nvarchar(64),The forecast category that the stage belongs to as specified in the external system.,,,,staging,,
 crmStages,id,uniqueidentifier,The unique identifier of the crmStage record.,,,,staging,,
+crmStages,modifiedAt,datetime,The date and time that the crmStage record was updated.,,,,staging,,
 crmStages,name,nvarchar(128),The master label of the stage as specified in the external system.,,,,staging,,
 crmStages,probability,"decimal(9,5)","The probability that an opportunity will be won given that it is in the stage, as specified in the external system.",,,,staging,,
 crmStages,sortOrder,integer,The sort order of the stage as specified in the external system.,,,,staging,,
-crmStages,modifiedAt,datetime,The date and time that the crmStage record was updated.,,,,staging,,
 crmUsers,crmOrganizationId,uniqueidentifier,The id of the crmOrganization that the user belongs to.,crmOrganizations,id,,staging,primary,Nto1
 crmUsers,department,nvarchar(128),The department of the user as specified in the external system.,,,,staging,,
 crmUsers,division,nvarchar(256),The division of the user as specified in the external system.,,,,staging,,
@@ -525,112 +253,410 @@ crmUsers,externalSystemModifiedAt,datetime,The date and time that the user recor
 crmUsers,firstName,nvarchar(128),The first name of the user as specified in the external system.,,,,staging,,
 crmUsers,fullPhotoUrl,nvarchar(256),The URL of the full photo of the user as specified by the external system.,,,,staging,,
 crmUsers,id,uniqueidentifier,The unique identifier of the crmUser record.,,,,staging,,
-crmUsers,role,nvarchar(256),The role of the use as specified in the external system.,,,,staging,,
 crmUsers,isActive,boolean,A boolean flag indicating whether or not the user is active as specified by the external system.,,,,staging,,
 crmUsers,lastName,nvarchar(128),The last name of the user as specified in the external system.,,,,staging,,
 crmUsers,managerCrmUserId,uniqueidentifier,The id of the crmUser that is designated as the manger of the user.,crmUsers,id,,staging,primary,Nto1
-crmUsers,name,nvarchar(256),The name of the user as specified in the external system.,,,,staging,,
-crmUsers,title,nvarchar(256),The title of the user as specifed in the external system.,,,,staging,,
 crmUsers,modifiedAt,datetime,The date and time that the crmUser record was updated.,,,,staging,,
-userActivity,id,uniqueidentifier,The unique identifier for the user activity,,,,staging,,
-userActivity,action,,"The action the user took such as a login, or a view or use of content (download, livesend, send by email, etc…).",,,,staging,,
-userActivity,actionType,,The type of action within the category that the user performed.  See the action reference for details.,,,,staging,,
-userActivity,actionCategory,,"The category of the action such as View, Usage, Login, Logout, etc…",,,,staging,,
-userActivity,occurredAt,datetime,The datetime when the event occurred,,,,staging,,
-userActivity,userId,uniqueidentifier,The id of the user who performed the action,users,id,,staging,primary,Nto1
-userActivity,userUsername,,The username of the user who performed the action,,,,roadmap,,
-userActivity,instanceName,,"The name given to the document before it was delivered.  Typically this is the name of the library content, except in cases of Livedocs with generated names or documents renamed in Workspace or cart before being delivered",,,,staging,,
-userActivity,instanceFormat,,"The format of the delivered content (pptx, docx, pdf, etc.)",,,,staging,,
-userActivity,isBoundDelivery,boolean,Boolean indicating if the usage is the result of a bound delivery option,,,,staging,,
-userActivity,totalPages,integer,"The number of pages of the delivered document.  Currently only provided for the Livesend action, but will be added for others in the future",,,,staging,,
-userActivity,contentId,uniqueidentifier,"A global content id representing a physical asset in the platform (represents library content, workspace content, and generated livedocs)",contents,id,,staging,primary,Nto1
-userActivity,libraryContentId,uniqueidentifier,The id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContents,id,,staging,informational,Nto1
-userActivity,libraryContentVersionId,uniqueidentifier,The version id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContentVersions,id,,staging,informational,Nto1
-userActivity,workspaceContentId,uniqueidentifier,The id of the workspace content that was delivered,workspaceContents,id,,staging,informational,Nto1
-userActivity,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was delivered,workspaceContentVersions,id,,staging,informational,Nto1
-userActivity,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,staging,informational,Nto1
-userActivity,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,staging,primary,Nto1
-userActivity,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that the activity took place on,generatedLivedocs,id,,staging,informational,Nto1
-userActivity,referrerEventId,uniqueidentifier,The id of the referrer event that the content activity is derived from,referrerEvents,id,,roadmap,primary,Nto1
-userActivity,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed or used in,contentProfiles,id,,staging,primary,Nto1
-userActivity,contentProfileName,,The name of the content profile this document was views or used in,,,,roadmap,,
-userActivity,productArea,,"The area of the product (DocCenter, NewsCenter, Workspace, Home Page, Search, etc...) where the action was performed",,,,roadmap,,
-userActivity,application,,"The application (Web, iOS, Android, Outlook, Gmail Salesforce, Dynamics, etc…) where the action was performed",,,,roadmap,,
-userActivity,contextId,nvarchar(255),The unique identifier of the external context that the action took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
-userActivity,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
-userActivity,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
-contentUsageHistory,id,uniqueidentifier,The primary id for events in this table,,,,prod,,
-contentUsageHistory,action,,"The usage/delivery action such as Download, Livesend, Send by Email, Add to Workspace, etc.",,,,prod,,
-contentUsageHistory,actionType,,An indicator if the delivery option is 'Built-In' as part of Seismic or is a 'Custom' delivery option,,,,prod,,
-contentUsageHistory,occurredAt,datetime,The datetime when the event occurred,,,,prod,,
-contentUsageHistory,userId,uniqueidentifier,The id of the user who performed the action,users,id,,prod,primary,Nto1
-contentUsageHistory,userUsername,,The username of the user who performed the action,,,,roadmap,,
-contentUsageHistory,instanceName,,"The name given to the document before it was delivered.  Typically this is the name of the library content, except in cases of Livedocs with generated names or documents renamed in Workspace or cart before being delivered",,,,prod,,
-contentUsageHistory,instanceFormat,,"The format of the delivered content (pptx, docx, pdf, etc.)",,,,prod,,
-contentUsageHistory,isBoundDelivery,boolean,Boolean indicating if the usage is the result of a bound delivery option,,,,prod,,
-contentUsageHistory,totalPages,integer,"The number of pages of the delivered document.  Currently only provided for the Livesend action, but will be added for others in the future",,,,prod,,
-contentUsageHistory,contentId,uniqueidentifier,The id of the content that the delivery was performed on,,,,staging,primary,Nto1
-contentUsageHistory,libraryContentId,uniqueidentifier,The id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContents,id,,prod,informational,Nto1
-contentUsageHistory,libraryContentVersionId,uniqueidentifier,The version id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContentVersions,id,,staging,informational,Nto1
-contentUsageHistory,workspaceContentId,uniqueidentifier,The id of the workspace content that was delivered,workspaceContents,id,,prod,informational,Nto1
-contentUsageHistory,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was delivered,workspaceContentVersions,id,,prod,informational,Nto1
-contentUsageHistory,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,prod,informational,Nto1
-contentUsageHistory,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,prod,primary,Nto1
-contentUsageHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that was delivered,generatedLivedocs,id,,staging,informational,Nto1
-contentUsageHistory,referrerEventId,uniqueidentifier,The referrer event that led to this content usage event,referrerEvents,id,,roadmap,primary,Nto1
-contentUsageHistory,contentProfileId,uniqueidentifier,The id of the content profile this document was delivered from,contentProfiles,id,,prod,primary,Nto1
-contentUsageHistory,productArea,,The product area that the user was in when they performed the delivery,,,,roadmap,,
-contentUsageHistory,application,,The application the user was using when they performed the delivery,,,,roadmap,,
-contentUsageHistory,contextId,nvarchar(255),The unique identifier of the external context that the delivery took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
-contentUsageHistory,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
-contentUsageHistory,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
-contents,id,uniqueidentifier,"The id of the content which can globally identify content from library, workspace, or a generated livedoc",,,,staging,,
-contents,instanceName,,The name of the document as given by the user or generated as part of the Livedoc generation,,,,staging,,
-contents,normalizedName,,The normalized source content name.  This will be the library content name for all content that comes from the library and the workspace name for content directly uploaded to Workspace.,,,,roadmap,,
-contents,libraryContentId,uniqueidentifier,The id of the library content.  This id is also present on all generated livedocs as well as any workspace content that originated from the library,libraryContents,id,,staging,informational,1to1
-contents,latestLibraryContentVersionId,uniqueidentifier,The id of the latest version of the library content,,,,staging,,
-contents,latestLibraryContentVersionCreatedAt,datetime,The datetime that the latest version of the library content was created,,,,staging,,
-contents,workspaceContentId,uniqueidentifier,The id of the workspace content,workspaceContents,id,,staging,informational,1to1
-contents,latestworkspaceContentVersionId,uniqueidentifier,The id of the latest version of the workspace content,,,,staging,,
-contents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the latest version of the workspace content was created,,,,staging,,
-contents,publishedVersionId,uniqueidentifier,The libraryContentVersionId of the highest published version of the document,,,,tbd,,
-contents,publishedVersionCreatedAt,datetime,The datetime that the highest published version was created,,,,tbd,,
-contents,publishedVersionExpiresAt,datetime,The expiration date for the highest published version,,,,staging,,
-contents,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that is represented in this table,generatedLivedocs,id,,staging,informational,1to1
-contents,createdAt,datetime,"The datetime that the first version of this document was created relative to the document location (i.e. the createdAt for workspace content is when it was saved to workspace, not the date of the library content's creation)",,,,staging,,
-contents,createdBy,uniqueidentifier,The id of the user who created the content,,,,staging,,
-contents,modifiedAt,datetime,The datetime that this document or its metadata was modified in any way,,,,staging,,
-contents,deletedAt,datetime,The datetime that this document was deleted,,,,staging,,
-contents,teamsiteId,uniqueidentifier,The teamsite id of content.  This will exist for all content that has a libraryContentId.,teamsites,id,,staging,primary,Nto1
-contents,teamsiteName,,The teamsite name of content.  This will exist for all content that has a libraryContentId.,,,,roadmap,,
-contents,version,,The library content version or workspace content version of the latest version of the content,,,,staging,,
-contents,isDeleted,boolean,A boolean indicating whether the content has been deleted,,,,staging,,
-contents,isPublished,boolean,A boolean indicating whether the content is currently published,,,,staging,,
-contents,format,,The format of the content,,,,staging,,
-contents,ownerId,uniqueidentifier,The id of the owner of the file in the library.  This is only present for content with a library content id (including generated livedocs and content in workspace).,users,id,,staging,primary,Nto1
-contents,ownerUsername,,The username of the owner of the file in the library.  This is only present for content with a library content id (including generated livedocs and content in workspace).,,,,roadmap,,
-contents,totalPages,integer,The total number of pages of the latest version of the document,,,,tbd,,
-contents,libraryUrl,,The url of the content in the Content Manager library,,,,staging,,
-contents,workspaceUrl,,The url of the content in Workspace (what url do we want here?  Probably the share url?  Presumably we want to make sure this URL respects permissions?),,,,roadmap,,
-contents,docCenterUrl,,The universal url of the content in DocCenter,,,,staging,,
-contents,newsCenterUrl,,The universal url of the content in NewsCenter,,,,staging,,
-contents,originContentProfileId,uniqueidentifier,The content profile id that the content originated from (this is present for all workspace content that has a libraryContentId),contentProfiles,id,,tbd,informational,Nto1
-contents,properties,json,This is an object that contains all of the content properties for this document,,,,staging,,
-contents,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,staging,,
-contents,isFolder,boolean,A boolean indicating if this content is a folder,,,,staging,,
-contents,isCartContent,boolean,A boolean indicating if this is content in a user's document cart (which is a specialzed hidden workspace folder),,,,staging,,
-contents,materializedPath,,The GUID path to this document in workspace,,,,roadmap,,
-contents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of this content,,,,roadmap,,
-contents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of this content,,,,roadmap,,
-referrerEvents,id,uniqueidentifier,"An id which represents a particular referrer event.  This id is used as a general alias to represent one of the downstream events such as a searchClick in order to act as a proxy between a table like contentUsageHistory and the referring event.  Will be one of these: searchClickId, landingPageClickId, homepageClickId, articleLinkClickId, pushNotificationClickId, doccenterNavigateClickId, workspaceNavigateClickId, articleContentClickId",,,,tbd,,
-referrerEvents,type,,"The type of referrer such as a searchClick, landingPageClick, pushNotificationClick, externalLink, etc…",,,,tbd,,
-referrerEvents,category,,,,,,tbd,,
-referrerEvents,productArea,,The product area that the referrer event took place in,,,,tbd,,
-referrerEvents,application,,The application that the referrer event took place in,,,,tbd,,
-referrerEvents,occurredAt,,The datetime when the referrer event occurred,,,,tbd,,
+crmUsers,name,nvarchar(256),The name of the user as specified in the external system.,,,,staging,,
+crmUsers,role,nvarchar(256),The role of the use as specified in the external system.,,,,staging,,
+crmUsers,title,nvarchar(256),The title of the user as specifed in the external system.,,,,staging,,
+deliveries,createdAt,datetime,The datetime that the email was sent,,,,tbd,,
+deliveries,createdBy,uniqueidentifier,The user id of the user who created/sent the email,users,id,,tbd,primary,Nto1
+deliveries,deliveryOption,uniqueidentifier,The type of delivery option that ties to this content delivery,,,,tbd,,
+deliveries,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
+deliveries,systemCreatedAt,datetime,datetime row was created,,,,tbd,,
+deliveries,systemModifiedAt,datetime,datetime row was modified,,,,tbd,,
+deliveries,type,nvarchar(50),"The type of delivery (Email, LinkGeneration, Etc)",,,,tbd,,
+deliveryRecipients,deliveryId,uniqueidentifier,The id from the deliveries table that the delivery recipient received,emails,id,,tbd,primary,Nto1
+deliveryRecipients,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,tbd,primary,Nto1
+deliveryRecipients,subtype,nvarchar(255),"If applicable (for email - CC, BCC, etc)",,,,tbd,,
+deliveryRecipients,type,nvarchar(255),"The type of the delivery recipient (email, linkedin, etc)",,,,tbd,,
+deliveryRecipients,value,nvarchar(255),"The email address, twitter handle, etc of the external user",,,,tbd,,
+emailBlasts,body,nvarchar(255),The body of the email blast,,,,roadmap,,
+emailBlasts,createdAt,datetime,The datetime that the email was sent,,,,roadmap,,
+emailBlasts,createdBy,uniqueidentifier,The user id of the user who created/sent the email,users,id,,roadmap,primary,Nto1
+emailBlasts,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
+emailBlasts,subject,nvarchar(255),The subject of the email blast,,,,roadmap,,
+emailBlasts,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
+emailBlasts,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
+emailRecipients,emailId,uniqueidentifier,The id from the email table that the email recipient received,emails,id,,tbd,primary,Nto1
+emailRecipients,externalUserEmail,nvarchar(255),The email address of the external user,,,,tbd,,
+emailRecipients,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,tbd,primary,Nto1
+emailRecipients,type,nvarchar(255),"TO, CC, BCC",,,,tbd,,
+emails,body,nvarchar(255),The body of the email,,,,tbd,,
+emails,createdAt,datetime,The datetime that the email was sent,,,,tbd,,
+emails,createdBy,uniqueidentifier,The user id of the user who created/sent the email,users,id,,tbd,primary,Nto1
+emails,deliveryId,uniqueidentifier,"The id of the delivery that this belongs to (note, this is nullable)",deliveries,id,,tbd,primary,?to?
+emails,emailBlastId,uniqueidentifier,The id of the email blast that this belongs to,emailBlasts,id,,tbd,primary,Nto1
+emails,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
+emails,nativeId,nvarchar(255),Unique Identifier coming from native app,,,,tbd,,
+emails,sentAt,datetime,Datetime the email was sent,,,,tbd,,
+emails,subject,nvarchar(255),The subject of the email,,,,tbd,,
+emails,systemCreatedAt,datetime,datetime row was created,,,,tbd,,
+emails,systemModifiedAt,datetime,datetime row was modified,,,,tbd,,
+externalUsers,email,nvarchar(255),The email address of the external user,,,,roadmap,,
+externalUsers,emailDomain,nvarchar(255),The email domain of the external user,,,,roadmap,,
+externalUsers,emailOptOut,boolean,A boolean indicating if this email address has opted out of receiving emails,,,,roadmap,,
+externalUsers,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
+externalUsers,trackingOptOut,boolean,A boolean indicating if this email address has opted out of tracking,,,,roadmap,,
+folderNavigateClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+generatedLivedocComponents,createdAt,datetime,The datetime the livedoc was generated,,,,staging,,
+generatedLivedocComponents,format,nvarchar(255),The format of content that was inserted via upload (will be null for all other components),,,,staging,,
+generatedLivedocComponents,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this component was included in,generatedLivedocs,id,,staging,primary,Nto1
+generatedLivedocComponents,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
+generatedLivedocComponents,insertMethod,nvarchar(255),"The way this component was included in the presentation such as Shared, Reference, Dynamic, or External",,,,staging,,
+generatedLivedocComponents,insertStatus,nvarchar(255),"The status of the component insert (Not Published, Not Found, Success)",,,,staging,,
+generatedLivedocComponents,libraryContentId,uniqueidentifier,The libraryContentId of the component,,,,staging,,
+generatedLivedocComponents,libraryContentName,nvarchar(max),The name of this component in the library,,,,staging,,
+generatedLivedocComponents,libraryContentShortId,uniqueidentifier,The short version of libraryContentId of the component (must have content id enabled in tenant),,,,staging,,
+generatedLivedocComponents,libraryContentVersionId,uniqueidentifier,The libraryContentVersionId of the component,,,,staging,,
+generatedLivedocComponents,parentComponentId,uniqueidentifier,The id of the component that this component is a child of in this generated livedoc,,,,roadmap,,
+generatedLivedocComponents,thumbnailImageId,uniqueidentifier,the lower resolution thumbnail imageId of the library content which can be used to get a thumbnail image of the library content,,,,roadmap,,
+generatedLivedocData,fieldName,nvarchar(max),The name of the field,,,,staging,,
+generatedLivedocData,fieldType,nvarchar(255),"The type of the field such as integer, string, float, date",,,,staging,,
+generatedLivedocData,fieldValue,nvarchar(max),The value of the field,,,,staging,,
+generatedLivedocData,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this data belongs to,generatedLivedocs,id,,staging,primary,Nto1
+generatedLivedocData,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
+generatedLivedocOutputs,clearNotes,boolean,Whether the document was generated with notes or notes cleared,,,,staging,,
+generatedLivedocOutputs,compatibility,nvarchar(max),The Acrobat version the PDF is designed for,,,,staging,,
+generatedLivedocOutputs,filename,nvarchar(max),The file name of the generated livedoc that user can deliver,,,,staging,,
+generatedLivedocOutputs,format,nvarchar(255),"The format of the generated livedoc (pdf, pptx, docx, excel)",,,,staging,,
+generatedLivedocOutputs,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this data belongs to,generatedLivedocs,id,,staging,,
+generatedLivedocOutputs,hasOpenPassword,boolean,Boolean indicating if the PDF requires a password to open,,,,staging,,
+generatedLivedocOutputs,hasOwnerOptions,boolean,Boolean indicating if the PDF is set to limit the options the owner can change on the unlocked PDF,,,,staging,,
+generatedLivedocOutputs,hasOwnerPassword,boolean,Boolean indicating if the PDF has a password to allow modifications,,,,staging,,
+generatedLivedocOutputs,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
+generatedLivedocOutputs,imageDPI,integer,The image DPI settings of the generated livedoc,,,,staging,,
+generatedLivedocOutputs,name,nvarchar(max),The display name for the generated livedoc (used when showing the generated livedoc in our product UI),,,,staging,,
+generatedLivedocOutputs,outputLayout,nvarchar(max),The PDF output layout of Full Page Slides or Note Pages,,,,staging,,
+generatedLivedocOutputs,size,integer,The file size in bytes for the generated livedoc,,,,staging,,
+generatedLivedocs,id,uniqueidentifier,The unique identifier for a given generated livedoc,contents,id,,staging,primary,1to1
+generatedLivedocs,libraryContentId,uniqueidentifier,The id of the library content that this generated livedoc is based on,libraryContents,id,,staging,informational,Nto1
+generatedLivedocs,libraryContentVersionId,uniqueidentifier,The libraryContentVersionId of the livedoc template,libraryContentVersions,id,,staging,informational,Nto1
+generatedLivedocs,occurredAt,datetime,The datetime the livedoc was generated,,,,staging,,
+generatedLivedocs,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the generated livedoc,,,,roadmap,,
+generatedLivedocs,processingTime,decimal,The time it took the engine to process the document,,,,internal,,
+generatedLivedocs,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the generated livedoc,,,,roadmap,,
+generatedLivedocs,userId,uniqueidentifier,The id of the user who generated the livedoc,users,id,,staging,,
+generatedLivedocSlides,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this slide was included in,generatedLivedocs,id,,staging,primary,Nto1
+generatedLivedocSlides,id,uniqueidentifier,The unique identifier for a given slide in the generated livedoc,,,,staging,,
+generatedLivedocSlides,pageShortId,nvarchar(255),The global unique identifier for this slide,,,,staging,,
+generatedLivedocSlides,parentComponentId,uniqueidentifier,The component that this slide was in as part of this presentation,,,,staging,,
+generatedLivedocSlides,position,integer,The 1-based position of this slide in the presentation,,,,staging,,
+generatedLivedocSlides,thumbnailImageId,uniqueidentifier,the lower resolution thumbnail imageId of this slide which can be used to get a thumbnail image of the slide,,,,roadmap,,
+generatedLivedocSlides,title,nvarchar(max),The title of this slide,,,,staging,,
+groupMembers,groupId,uniqueidentifier,The id of the group that this member belongs to,groups,id,,staging,,
+groupMembers,groupName,nvarchar(255),The name of the group,,,,staging,,
+groupMembers,id,uniqueidentifier,The primary id for items in this table representing a user's assignment to a particular group,,,,staging,,
+groupMembers,userId,uniqueidentifier,The id of the user,users,id,,staging,,
+groups,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
+groups,name,nvarchar(255),The name of the group,,,,staging,,
+homepageClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+landingPageClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+libraryContents,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,prod,,
+libraryContents,createdAt,datetime,The datetime that this document was created,,,,prod,,
+libraryContents,docCenterUrl,nvarchar(max),The URL to this document in web DocCenter,,,,prod,,
+libraryContents,format,nvarchar(255),The format of this document,,,,prod,,
+libraryContents,id,uniqueidentifier,The unique indentifier for a given document in the ControlCenter/ContentManager library,contents,id,,prod,primary,1to1
+libraryContents,isDeleted,boolean,Boolean indicating if this content is deleted,,,,prod,,
+libraryContents,isPublished,boolean,Boolean indicating if any version of this document is published,,,,prod,,
+libraryContents,latestLibraryContentVersionCreatedAt,datetime,"The creation date for the latest version of this document, this is what most people think of when they ask 'when was this last updated'",,,,prod,,
+libraryContents,latestLibraryContentVersionId,uniqueidentifier,The libraryContentVersionId for the latest version of this document,libraryContentVersions,id,,prod,informational,1to1
+libraryContents,latestLibraryContentVersionSize,integer,The size in bytes for the latest version of this document,,,,prod,,
+libraryContents,libraryUrl,nvarchar(max),The URL to this document in the library,,,,prod,,
+libraryContents,modifiedAt,datetime,The datetime that this document had any form of modification.  This is typically only used by machines and is not relevant for a person's perception of the last change to the document.,,,,prod,,
+libraryContents,name,nvarchar(255),The name of the document in the ControlCenter/ContentManager library,,,,prod,,
+libraryContents,newsCenterUrl,nvarchar(max),The URL to this document in web NewsCenter,,,,prod,,
+libraryContents,ownerId,uniqueidentifier,The id of the owner of this document,users,id,,prod,primary,Nto1
+libraryContents,ownerUsername,nvarchar(255),The username of the owner of this document,,,,roadmap,,
+libraryContents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of the library content,,,,tbd,,
+libraryContents,properties,json,This is an object that contains all of the content properties for this document,,,,prod,,
+libraryContents,publishedVersionExpiresAt,datetime,The expiration date of the latest published version,,,,prod,,
+libraryContents,teamsiteId,uniqueidentifier,The id of the teamsite this document exists in,teamsites,id,,prod,primary,Nto1
+libraryContents,teamsiteName,nvarchar(255),The name of the teamsite this document exists in,,,,roadmap,,
+libraryContents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of the library content,,,,tbd,,
+libraryContents,version,nvarchar(255),The version number of the latest version of the document such as 5.3,,,,prod,,
+libraryContentVersions,assignedToProfiles,json,A JSON object representing the list of profiles this document is assigned to,,,,tbd,,
+libraryContentVersions,createdAt,datetime,The datetime that this version was created,,,,opdb,,
+libraryContentVersions,createdBy,uniqueidentifier,The user id of the user who created this version,users,id,,opdb,primary,Nto1
+libraryContentVersions,expiresAt,datetime,The datetime that this version expires,,,,opdb,,
+libraryContentVersions,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
+libraryContentVersions,isExpired,boolean,A boolean indicating if this version is expired,,,,opdb,,
+libraryContentVersions,isPublished,boolean,A boolean indicating if this version is the published version,,,,opdb,,
+libraryContentVersions,libraryContentId,uniqueidentifier,The id of the library content this is a version of,libraryContents,id,,opdb,primary,Nto1
+libraryContentVersions,modifiedAt,datetime,The datetime that this version was modified,,,,opdb,,
+libraryContentVersions,name,nvarchar(255),The name of the library content,,,,opdb,,
+libraryContentVersions,previewImageId,uniqueidentifier,An id to the higher resolution preview image for this library content version,,,,tbd,,
+libraryContentVersions,size,integer,The size in bytes of this version of the content,,,,opdb,,
+libraryContentVersions,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image for this library content version,,,,tbd,,
+libraryContentVersions,version,nvarchar(255),The version number of this version such as 4.0,,,,opdb,,
+livedocGenerationHistory,application,,The application that this livedoc was generated from,,,,tbd,,
+livedocGenerationHistory,contentProfileId,uniqueidentifier,The content profile that this livedoc was generated from.  This is not included for livedocs generated in workspace.,contentProfiles,id,,tbd,primary,Nto1
+livedocGenerationHistory,createdBy,uniqueidentifier,The user id of the user who generated this livedoc,users,id,,tbd,primary,Nto1
+livedocGenerationHistory,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that this event generated,generatedLivedocs,id,,tbd,primary,1to1
+livedocGenerationHistory,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
+livedocGenerationHistory,libraryContentId,uniqueidentifier,The library content id that this livedoc is based on,libraryContents,id,,tbd,informational,Nto1
+livedocGenerationHistory,libraryContentVersionId,uniqueidentifier,The library content version id that this livedoc is based on,libraryContentVersions,id,,tbd,informational,Nto1
+livedocGenerationHistory,occurredAt,datetime,The datetime that this livedoc was generated,,,,tbd,,
+livedocGenerationHistory,productArea,,The product area where this livedoc was generated from,,,,tbd,,
+livedocGenerationHistory,workspaceContentId,uniqueidentifier,The workspace content id that was the starting point for this generated livedoc,workspaceContents,id,,tbd,informational,Nto1
+livedocGenerationHistory,workspaceContentVersionId,uniqueidentifier,The workspace content version id that was the starting point for this generated livedoc,workspaceContentVersions,id,,tbd,informational,Nto1
 livesendContentDownloads,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
 livesendContentDownloads,livesendLinkContentId,uniqueidentifier,The id of the livesend link content that the page view occurred on,livesendLinkContents,id,,roadmap,primary,Nto1
 livesendContentDownloads,livesendViewingSessionId,uniqueidentifier,The id of the livesend viewing session that this page view is a part of,livesendViewingSession,id,,roadmap,primary,Nto1
 livesendContentDownloads,occurredAt,datetime,The datetime that the page view occurred,,,,roadmap,,
 livesendContentDownloads,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
 livesendContentDownloads,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
+livesendLinkContents,createdAt,datetime,The datetime that the content was added to the livesend link,,,,prod,,
+livesendLinkContents,createdBy,uniqueidentifier,The user id of the user who created the livesend link,,,,prod,,
+livesendLinkContents,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
+livesendLinkContents,livesendLinkId,uniqueidentifier,The id of the livesend link that this content is included in,livesendLinks,id,,prod,primary,Nto1
+livesendLinkContents,modifiedAt,datetime,"The datetime that this content was modified, this is used purely for ETL purposes and is typically the same as the createdAt date",,,,prod,,
+livesendLinkContents,name,,The name of the document in the livesend link,,,,prod,,
+livesendLinkContents,totalPages,integer,The total number of pages in this document,,,,prod,,
+livesendLinkContents,url,,The url to a specific document in a livesend link,,,,notpossible,,
+livesendLinkDeliveries,deliveryId,uniqueidentifier,The id of the delivery that this link was sent to,deliveries,id,,tbd,primary,Nto1
+livesendLinkDeliveries,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
+livesendLinkDeliveries,livesendLinkId,uniqueidentifier,The id of the livesend link that this delivery goes to,livesendLinks,id,,tbd,primary,Nto1
+livesendLinkDeliveries,systemCreatedAt,datetime,datetime row was created,,,,tbd,,
+livesendLinkDeliveries,systemModifiedAt,datetime,datetime row was modified,,,,tbd,,
+livesendLinkMembers,createdAt,datetime,The datetime that the link member was added to the livesend link,,,,prod,,
+livesendLinkMembers,email,,The email address of the link member,,,,prod,,
+livesendLinkMembers,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,roadmap,primary,Nto1
+livesendLinkMembers,internalUserId,uniqueidentifier,"The id of the user if a user with this email address was found in the users table.  In the case that more than one user was found, one of them will be chosen at random.",users,id,,tbd,primary,Nto1
+livesendLinkMembers,livesendLinkId,uniqueidentifier,The id of the livesend link that this content is included in,livesendLinks,id,,prod,primary,Nto1
+livesendLinkMembers,modifiedAt,datetime,"The datetime that this link member was modified, this is used purely for ETL purposes and is typically the same as the createdAt date",,,,prod,,
+livesendLinks,allowDownload,boolean,LiveSend Setting - is content downloadable,,,,roadmap,,
+livesendLinks,clientApp,nvarchar(50),Application used to created link,,,,tbd,,
+livesendLinks,clientId,uniqueidentifier,Unique Id for application used to create link,,,,tbd,,
+livesendLinks,createdAt,datetime,The datetime that the livesend link was created,,,,prod,,
+livesendLinks,createdBy,uniqueidentifier,The user id of the user who created the livesend link,users,id,,prod,primary,Nto1
+livesendLinks,deletedAt,datetime,The datetime that the livesend link was deleted,,,,roadmap,,
+livesendLinks,deletedBy,uniqueidentifier,The user id of the user who deleted the livesend link,users,id,,roadmap,primary,Nto1
+livesendLinks,emailId,uniqueidentifier,The id of the email that this link was sent as a part of,emails,id,,tbd,primary,Nto1
+livesendLinks,expireAfterView,boolean,LiveSend Setting - allow single view of livesend,,,,roadmap,,
+livesendLinks,expiresAt,datetime,LiveSend Setting - when the LiveSend link expires,,,,roadmap,,
+livesendLinks,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
+livesendLinks,isSeparateSend,boolean,"A boolean indicating if the link was generated as the result of a ""blast email"" which creates many links or if the link is a shared link across many recipients",,,,prod,,
+livesendLinks,legacyInvitationId,uniqueidentifier,The (legacy) invitationId for the link,,,,internal,,
+livesendLinks,modifiedAt,datetime,The datetime that the livesend link was modified,,,,roadmap,,
+livesendLinks,modifiedBy,uniqueidentifier,The user id of the user who modified the livesend link,users,id,,roadmap,primary,Nto1
+livesendLinks,notificationSetting,integer,LiveSend Setting - notification setting for link,,,,roadmap,,
+livesendLinks,password,nvarchar(50),LiveSend Setting - password set for link,,,,roadmap,,
+livesendLinks,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
+livesendLinks,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
+livesendLinks,trackingCode,,The tracking code entered by the user when generating the livesend link,,,,roadmap,,
+livesendLinks,url,,The url of the livesend link,,,,roadmap,,
+livesendPageViews,contentVersionId,uniqueidentifier,The link that this maps the page view to a specific version of the content (useful for when we can/will update content),content,id,,roadmap,primary,Nto1
+livesendPageViews,duration,integer,The number of milliseconds spent viewing the page until the next event occurs.,,,,prod,,
+livesendPageViews,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
+livesendPageViews,legacyLivesendContentId,uniqueidentifier,"[INTERNAL] This is the livesendContentId from the operational database, for reference only.",,,,internal,,
+livesendPageViews,livesendLinkContentId,uniqueidentifier,The id of the livesend link content that the page view occurred on,livesendLinkContents,id,,prod,primary,Nto1
+livesendPageViews,livesendViewingSessionId,uniqueidentifier,The id of the livesend viewing session that this page view is a part of,livesendViewingSession,id,,prod,primary,Nto1
+livesendPageViews,occurredAt,datetime,The datetime that the page view occurred,,,,prod,,
+livesendPageViews,pageIndex,integer,The 1-N based page number that was viewed,,,,prod,,
+livesendPageViews,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,prod,,
+livesendPageViews,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,prod,,
+livesendPageViews,thumbnailImageId,uniqueidentifier,The id for the thumbnail,,,,tbd,,
+livesendViewingSession,cookieId,nvarchar(255),A uniqueId specified by cookie,,,,roadmap,,
+livesendViewingSession,cookieType,nvarchar(50),"(Right now) Either ""SeismicUser"" or ""PublicUser""",,,,roadmap,,
+livesendViewingSession,domain,nvarchar(255),Domain of the IP used to view (based on lookup),,,,roadmap,,
+livesendViewingSession,externalUserId,uniqueidentifier,Id for External User who viewed link,externalUsers,id,,roadmap,primary,Nto1
+livesendViewingSession,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
+livesendViewingSession,ipAddress,nvarchar(50),IP Address of view session,,,,roadmap,,
+livesendViewingSession,legacySessionId,uniqueidentifier,Unique Id for the session in the LiveShare DB,,,,internal,,
+livesendViewingSession,livesendLinkId,uniqueidentifier,The id of the livesend link that this session is acting on,livesendLinks,id,,tbd,primary,Nto1
+livesendViewingSession,locationAnonymized,boolean,"If true, IP address has not been recorded (or we've used IP for server - TBD)",,,,internal,,
+livesendViewingSession,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,roadmap,,
+livesendViewingSession,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,roadmap,,
+livesendViewingSession,status,nvarchar(50),"session status: sessionStarted, sessionEnded",,,,roadmap,,
+livesendViewingSession,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
+livesendViewingSession,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
+livesendViewingSession,userAgent,nvarchar(255),UserAgent of view session,,,,roadmap,,
+livesendViewingSession,validSession,boolean,"True when we believe this was a ""real view"" (as opposed to virus scan, etc)",,,,roadmap,,
+livesendViewingSession,viewDetails,json,[TBD] We may want some form of summary of the session? Maybe as multiple fields not a JSON object.,,,,tbd,,
+meetingMembers,exitedAt,datetime,The timestamp when the member last exited the meeting,,,,tbd,,
+meetingMembers,id,uniqueidentifier,The id of the meeting member,,,,tbd,,
+meetingMembers,internalUserEmail,nvarchar(max),The email address of the internal user,,,,tbd,,
+meetingMembers,internalUserId,uniqueidentifier,The user id of the member if they are a registered user of the seimic platform,users,id,,tbd,primary,Nto1
+meetingMembers,internalUserUsername,nvarchar(max),The username of the internal user,,,,tbd,,
+meetingMembers,isModerator,boolean,Boolean indicating if this member is the moderator of the meeting,,,,tbd,,
+meetingMembers,joinedAt,datetime,The timestamp when the member first joined the meeting,,,,tbd,,
+meetingMembers,meetingId,uniqueidentifier,The id of the meeting this member participated in,meetings,id,,tbd,primary,Nto1
+meetingMembers,screenShareDuration,bigint,Total screen share duration from this member in seconds,,,,tbd,,
+meetingMembers,surveyFeedback,nvarchar(max),The plain text feedback on the meeting from the member,,,,tbd,,
+meetingMembers,surveyRating,integer,The 1 to 5 rating provided by the member,,,,tbd,,
+meetingMembers,totalDuration,bigint,The total duration in seconds that the member was in the meeting,,,,tbd,,
+meetings,createdBy,uniqueidentifier,The user id of the user who created the meeting,,,,tbd,,
+meetings,endedAt,datetime,The timestamp when the meeting ended,,,,tbd,,
+meetings,id,uniqueidentifier,The id of the meeting,,,,tbd,,
+meetings,meetingDuration,bigint,Total meeting duration in seconds,,,,tbd,,
+meetings,roomId,nvarchar(255),An id representing the persistent room available at the meeting's URL,,,,tbd,,
+meetings,screenShareDuration,bigint,Total screen share duration from all participants in seconds,,,,tbd,,
+meetings,startedAt,datetime,The timestamp when the meeting started,,,,tbd,,
+meetings,totalMembers,integer,Total number of members that attended the meeting,,,,tbd,,
+meetings,url,nvarchar(max),The url of the meeting,,,,tbd,,
+profileAssignments,contentProfileId,uniqueidentifier,The content profile id of the profile the content is assigned to,contentProfiles,id,,roadmap,,
+profileAssignments,libraryContentId,uniqueidentifier,The library content id of the content assigned to a content profile,libraryContents,id,,roadmap,,
+pushNotificationClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+referrerEvents,application,,The application that the referrer event took place in,,,,tbd,,
+referrerEvents,category,,,,,,tbd,,
+referrerEvents,id,uniqueidentifier,"An id which represents a particular referrer event.  This id is used as a general alias to represent one of the downstream events such as a searchClick in order to act as a proxy between a table like contentUsageHistory and the referring event.  Will be one of these: searchClickId, landingPageClickId, homepageClickId, articleLinkClickId, pushNotificationClickId, doccenterNavigateClickId, workspaceNavigateClickId, articleContentClickId",,,,tbd,,
+referrerEvents,occurredAt,,The datetime when the referrer event occurred,,,,tbd,,
+referrerEvents,productArea,,The product area that the referrer event took place in,,,,tbd,,
+referrerEvents,type,,"The type of referrer such as a searchClick, landingPageClick, pushNotificationClick, externalLink, etc…",,,,tbd,,
+searchClicks,activeScope,nvarchar(255),"Which scope (DocCenter, Workspace, ContentManager, or All) the user has active when they click on a document",,,,roadmap,,
+searchClicks,application,nvarchar(255),The application that the click took place in,,,,roadmap,,
+searchClicks,clickNumber,integer,The number of the click in the searchHistoryId in cases where the user clicks on many documents within a single set of search results,,,,tbd,,
+searchClicks,contentId,uniqueidentifier,The content id of the content that the click occurred on,,,,internal,,
+searchClicks,contentVersionId,uniqueidentifier,The content version id of the content that the click occurred on,,,,internal,,
+searchClicks,currentPage,integer,The current page of the search when the click happened (pages numbered from 1),,,,roadmap,,
+searchClicks,id,uniqueidentifier,The primary id for events in this table,referrerEvents,id,,roadmap,primary,1to1
+searchClicks,instanceName,nvarchar(255),The name of the document or folder that was clicked,,,,roadmap,,
+searchClicks,isFolder,boolean,A boolean indicating if the click was on a folder,,,,roadmap,,
+searchClicks,occurredAt,datetime,The datetime that the click occurred at,,,,roadmap,,
+searchClicks,productArea,nvarchar(255),"The product area that the click occurred in.  i.e. if you search from homepage, the productArea should be homepage.  Only when you are on the ""search"" page should the product area be ""search""",,,,tbd,,
+searchClicks,resultRank,integer,The index of the item in the result list relative to the first item on page 1 (results numbered from 1).  ,,,,roadmap,,
+searchClicks,searchHistoryId,uniqueidentifier,The id of the search history that this click happened in,searchHistory,id,,roadmap,primary,Nto1
+searchClicks,type,nvarchar(255),"Whether the click leads to a view, preview, or delivery",,,,tbd,,
+searchClicks,userId,uniqueidentifier,The id of the user who did the click,,,,roadmap,,
+searchClicks,viewMode,nvarchar(255),"The view mode (list, card, tile, or typeahead view) the user was in when they clicked on a document",,,,roadmap,,
+searchFacets,contentPropertyId,uniqueidentifier,The id of the content property that this facet is based on,contentProperties,id,,roadmap,informational,Nto1
+searchFacets,contentPropertyName,,The name of the content property that this facet is based on,,,,roadmap,,
+searchFacets,contentPropertyValue,,The value of the content property that this facet is applying,,,,roadmap,,
+searchFacets,searchHistoryId,uniqueidentifier,The id of the search history that this facet acted on,searchHistory,id,,roadmap,primary,Nto1
+searchHistory,application,,The application where the search was performed,,,,tbd,,
+searchHistory,duration,integer,[INTERNAL ONLY] Duration in milliseconds it took for the search to return results,,,,internal,,
+searchHistory,id,uniqueidentifier,"The primary id for events in this table.  Represents a change in search term or facets, but does not change across pages.",,,,prod,,
+searchHistory,occurredAt,datetime,The timestamp that the search occurred,,,,prod,,
+searchHistory,resultCount,integer,The total number of results returned by the search,,,,prod,,
+searchHistory,resultCountContentManager,integer,The total number of ContentManager results returned by the search,,,,prod,,
+searchHistory,resultCountControlCenter,integer,The total number of ControlCenter results returned by the search,,,,prod,,
+searchHistory,resultCountDocCenter,integer,The total number of DocCenter results returned by the search,,,,prod,,
+searchHistory,resultCountNewsCenter,integer,The total number of NewsCenter results returned by the search,,,,prod,,
+searchHistory,resultCountWorkspace,integer,The total number of Workspace results returned by the search,,,,prod,,
+searchHistory,scope,,"A JSON object represting the product area and folder scope of the search such as {""productArea"" : [""DocCenter""], ""folder"" : {""path"" : ""/profile/folder name/"", ""id"" : ""folder Id""}}",,,,tbd,,
+searchHistory,searchCycleId,uniqueidentifier,An id for the combined cycle of steps for search and filter,,,,prod,,
+searchHistory,searchEngine,,"The search engine used ie. Azure, elastic",,,,internal,,
+searchHistory,searchEngineVersion,,Search engine version used ie. V2_2018,,,,internal,,
+searchHistory,searchTermNormalized,,The search term converted to lowercase and all special characters replaced by their ASCII equivalent,,,,prod,,
+searchHistory,searchTermRaw,,The search term as entered by the user,,,,prod,,
+searchHistory,searchType,,Keyword Search or Facet Search,,,,prod,,
+searchHistory,selectedFacets,,A JSON object representing key value pairs of properties and selected values,,,,prod,,
+searchHistory,sortBy,,"What the search is sorted by, Relevance or Last Modified",,,,prod,,
+searchHistory,userId,uniqueidentifier,The id of the user who performed the search,users,id,,prod,primary,Nto1
+searchWords,occurredAt,datetime,The timestamp that the search occurred,,,,staging,,
+searchWords,searchCycleId,uniqueidentifier,An id for the combined cycle of steps for search and filter,,,,staging,,
+searchWords,searchHistoryId,uniqueidentifier,The id of the search history these words are from,searchHistory,id,,staging,primary,Nto1
+searchWords,word,,A single word from the search term,,,,staging,,
+teamsites,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
+teamsites,name,,The name of the teamsite,,,,staging,,
+universalLinkClicks,id,uniqueidentifier,,referrerEvents,id,,tbd,,
+userActivity,action,,"The action the user took such as a login, or a view or use of content (download, livesend, send by email, etc…).",,,,staging,,
+userActivity,actionCategory,,"The category of the action such as View, Usage, Login, Logout, etc…",,,,staging,,
+userActivity,actionType,,The type of action within the category that the user performed.  See the action reference for details.,,,,staging,,
+userActivity,application,,"The application (Web, iOS, Android, Outlook, Gmail Salesforce, Dynamics, etc…) where the action was performed",,,,roadmap,,
+userActivity,contentId,uniqueidentifier,"A global content id representing a physical asset in the platform (represents library content, workspace content, and generated livedocs)",contents,id,,staging,primary,Nto1
+userActivity,contentProfileId,uniqueidentifier,The id of the content profile this document was viewed or used in,contentProfiles,id,,staging,primary,Nto1
+userActivity,contentProfileName,,The name of the content profile this document was views or used in,,,,roadmap,,
+userActivity,contextId,nvarchar(255),The unique identifier of the external context that the action took place from.  Typically this is the CRM record id such as 0066A000002701I or 80a60f9c-9d65-4e4b-b9e7-c4fc3431ffba depending on your CRM.,,,,roadmap,,
+userActivity,contextName,nvarchar(255),"This is the name of the contextual record, which is typically the name of the specific Opportunity, Contact, Account, etc… But can also be the name for a record in a custom application.",,,,roadmap,,
+userActivity,contextType,nvarchar(255),"This is the type of context, which is typically the record type in the CRM such as Opportunity, Contact, Account, etc… But can also be the contextType for custom applications with a different concept of context.",,,,roadmap,,
+userActivity,generatedLivedocId,uniqueidentifier,The id of the generated livedoc that the activity took place on,generatedLivedocs,id,,staging,informational,Nto1
+userActivity,id,uniqueidentifier,The unique identifier for the user activity,,,,staging,,
+userActivity,instanceFormat,,"The format of the delivered content (pptx, docx, pdf, etc.)",,,,staging,,
+userActivity,instanceName,,"The name given to the document before it was delivered.  Typically this is the name of the library content, except in cases of Livedocs with generated names or documents renamed in Workspace or cart before being delivered",,,,staging,,
+userActivity,isBoundDelivery,boolean,Boolean indicating if the usage is the result of a bound delivery option,,,,staging,,
+userActivity,libraryContentId,uniqueidentifier,The id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContents,id,,staging,informational,Nto1
+userActivity,libraryContentVersionId,uniqueidentifier,The version id of the library content that was delivered even if the delivery was on a derived Workspace document,libraryContentVersions,id,,staging,informational,Nto1
+userActivity,livesendLinkContentId,uniqueidentifier,This is guaranteed unique in this table and can be treated as a primary key to join to and table that can be joined to livesendLinkContents,livesendLinkContents,id,,staging,primary,Nto1
+userActivity,livesendLinkId,uniqueidentifier,The id of the livesend link that this document was included in,livesendLinks,id,,staging,informational,Nto1
+userActivity,occurredAt,datetime,The datetime when the event occurred,,,,staging,,
+userActivity,productArea,,"The area of the product (DocCenter, NewsCenter, Workspace, Home Page, Search, etc...) where the action was performed",,,,roadmap,,
+userActivity,referrerEventId,uniqueidentifier,The id of the referrer event that the content activity is derived from,referrerEvents,id,,roadmap,primary,Nto1
+userActivity,totalPages,integer,"The number of pages of the delivered document.  Currently only provided for the Livesend action, but will be added for others in the future",,,,staging,,
+userActivity,userId,uniqueidentifier,The id of the user who performed the action,users,id,,staging,primary,Nto1
+userActivity,userUsername,,The username of the user who performed the action,,,,roadmap,,
+userActivity,workspaceContentId,uniqueidentifier,The id of the workspace content that was delivered,workspaceContents,id,,staging,informational,Nto1
+userActivity,workspaceContentVersionId,uniqueidentifier,The version id of the workspace content that was delivered,workspaceContentVersions,id,,staging,informational,Nto1
+userLoginHistory,application,,The application the user was using when they logged in,,,,opdb-dirty,,
+userLoginHistory,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
+userLoginHistory,occurredAt,datetime,The datetime that this login occurred,,,,opdb,,
+userLoginHistory,userId,uniqueidentifier,The id of the user who logged in,users,id,,opdb,primary,Nto1
+userProperties,id,uniqueidentifier,The primary id for items in this table,,,,staging,,
+userProperties,name,,The name of the user property,,,,staging,,
+userProperties,type,,"The type of the user property (string, integer, date, boolean, float)",,,,staging,,
+userPropertyAssignments,userId,uniqueidentifier,The id of the user that this property applies to,users,id,,staging,primary,Nto1
+userPropertyAssignments,userPropertyId,uniqueidentifier,The id of the user property,userProperties,id,,staging,primary,Nto1
+userPropertyAssignments,userPropertyName,,The name of the user property,,,,staging,,
+userPropertyAssignments,userPropertyType,,"The type of the user property (string, integer, date, boolean, float)",,,,staging,,
+userPropertyAssignments,userPropertyValue,,One of the values assigned to the given user for this user property,,,,staging,,
+userPropertyValues,userPropertyId,uniqueidentifier,The id of the user property that this value belongs to,userProperties,id,,opdb,primary,Nto1
+userPropertyValues,userPropertyName,,The name of the user property that this value belongs to,,,,opdb,,
+userPropertyValues,userPropertyType,,The type of the user property that this value belongs to,,,,opdb,,
+userPropertyValues,value,,The one of values for a given user property,,,,opdb,,
+users,createdAt,datetime,The timestamp when the user record was created,,,,prod,,
+users,defaultContentProfileId,uniqueidentifier,The id of the users default content profile,,,,prod,,
+users,defaultContentProfileName,,The name of the users default content profile,,,,roadmap,,
+users,deletedAt,datetime,The timestamp when the user record was marked deleted,,,,prod,,
+users,email,,The user's email address,,,,prod,,
+users,emailDomain,,The user's email address domain such as seismic.com,,,,prod,,
+users,firstName,,The user's first name or given name,,,,prod,,
+users,fullName,,The user's full name,,,,prod,,
+users,groups,json,A JSON object representing the list of groups the user is a member of,,,,prod,,
+users,id,uniqueidentifier,The primary id for items in this table,,,,prod,,
+users,isDeleted,boolean,A flag indicating if the user is currently considered deleted,,,,prod,,
+users,isSeismicEmployee,boolean,A flag indicating if the user is a Seismic employee,,,,prod,,
+users,isSystemAdmin,boolean,A flag indicating if the user has system administration permissions,,,,opdb-difficult,,
+users,lastName,,The user's last name or surname,,,,prod,,
+users,licenseType,,"The license type for the user such as premium, business, or partner",,,,prod,,
+users,modifiedAt,datetime,The timestamp when the user record was last modified,,,,prod,,
+users,organization,,The user's organization,,,,prod,,
+users,properties,json,A JSON object representing list of properties and values for the user,,,,prod,,
+users,ssoUserId,,The single sign-on id for the user,,,,opdb,,
+users,title,,The user's title,,,,prod,,
+users,username,,The user's username,,,,prod,,
+workspaceComments,annotationType,,"The type of annotation (rectange, oval, pin, line) the comment is associated with",,,,opdb,,
+workspaceComments,commentHTML,,The full HTML of the comment including styling and mentions,,,,opdb,,
+workspaceComments,commentText,,The plain text version of the comment,,,,opdb,,
+workspaceComments,createdBy,uniqueidentifier,The user id of the user who made the comment,users,id,,opdb,primary,Nto1
+workspaceComments,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
+workspaceComments,pageIndex,integer,The 1-N based page number where the annotation was placed,,,,opdb,,
+workspaceComments,workspaceContentId,uniqueidentifier,The workspace content id of the content that the comment was made on,workspaceContents,id,,opdb,,
+workspaceComments,workspaceContentVersionId,uniqueidentifier,The workspace content version id of the content that the comment was made on,workspaceContentVersions,id,,opdb,,
+workspaceContents,createdAt,datetime,The datetime that the first version of this content was created in Workspace,,,,prod,,
+workspaceContents,createdBy,uniqueidentifier,The user id of the user who created the first version of this content in workspace,users,id,,prod,primary,Nto1
+workspaceContents,id,uniqueidentifier,The primary id for items in this table,contents,id,,prod,primary,1to1
+workspaceContents,isCartContent,boolean,A boolean indicating if this is content in a user's document cart (which is a specialzed hidden workspace folder),,,,prod,,
+workspaceContents,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,prod,,
+workspaceContents,isDeleted,boolean,A boolean indicating if this content has been deleted from Workspace,,,,prod,,
+workspaceContents,isFolder,boolean,A boolean indicating if this content is a folder,,,,prod,,
+workspaceContents,latestWorkspaceContentVersionCreatedAt,datetime,The datetime that the highest version was created,,,,prod,,
+workspaceContents,latestWorkspaceContentVersionId,uniqueidentifier,The workspace version id of the highest version,workspaceContentVersions,id,,prod,informational,1to1
+workspaceContents,libraryContentId,uniqueidentifier,The library content id that this workspace content originated from,libraryContents,id,,prod,informational,Nto1
+workspaceContents,materializedPath,,The full path of workspaceContentIds representing the parent folder path to this workspace content,,,,prod,,
+workspaceContents,modifiedAt,datetime,The datetime that this content was last altered in any way,,,,prod,,
+workspaceContents,name,,The name of the content,,,,prod,,
+workspaceContents,previewImageId,uniqueidentifier,An id to the higher resolution preview image representing the latest version of the workspace content,,,,tbd,,
+workspaceContents,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image representing the latest version of the workspace content,,,,tbd,,
+workspaceContents,version,,The current version number of this document in workspace,,,,prod,,
+workspaceContentVersions,createdAt,datetime,The datetime that this version was created,,,,opdb,,
+workspaceContentVersions,createdBy,uniqueidentifier,"The user id of the user who created this version.  In the case of auto-update, this is the owner of the library content.",users,id,,opdb,primary,Nto1
+workspaceContentVersions,format,,The format of this version of the workspace content,,,,opdb,,
+workspaceContentVersions,id,uniqueidentifier,The primary id for items in this table,,,,opdb,,
+workspaceContentVersions,internalTypeCode,integer,[INTERNAL] The internal type code for this content type in workspace,,,,internal,,
+workspaceContentVersions,isCartContent,boolean,A boolean indicating if this is content in a user's document cart (which is a specialzed hidden workspace folder),,,,opdb,,
+workspaceContentVersions,isContextualFolderContent,boolean,A boolean indicating if this content is in a contextual workspace folder,,,,opdb,,
+workspaceContentVersions,isFolder,boolean,A boolean indicating if this content is a folder,,,,opdb,,
+workspaceContentVersions,isLiveSendStorage,boolean,[INTERNAL] Boolean indicating if this is hidden storage used by Livesend when performing livesend from DocCenter,,,,internal,,
+workspaceContentVersions,isVirtualSharingNode,boolean,[INTERNAL] Boolean indicating if this is a virtual node in a user's workspace that represents a link to the physical folder or content,,,,internal,,
+workspaceContentVersions,libraryContentId,uniqueidentifier,The library content id that this content is derived from,libraryContents,id,,opdb-dirty,informational,Nto1
+workspaceContentVersions,libraryContentVersionId,uniqueidentifier,"The library content version id that this particular version is derived from.  If this version is the result of an upload, the library version id is retained from the last version created directly from the library",libraryContentVersions,id,,opdb-dirty,informational,Nto1
+workspaceContentVersions,materializedPath,,The full path of workspaceContentIds representing the parent folder path to this workspace content,,,,opdb,,
+workspaceContentVersions,name,,The name of the workspace content that this is a version of,,,,opdb,,
+workspaceContentVersions,previewImageId,uniqueidentifier,An id to the higher resolution preview image for this workspace content version,,,,opdb,,
+workspaceContentVersions,size,integer,The size in bytes of this version of the workspace content,,,,opdb,,
+workspaceContentVersions,thumbnailImageId,uniqueidentifier,An id to the lower resolution thumbnail image for this workspace content version,,,,opdb,,
+workspaceContentVersions,version,,The version number of this version of the workspace content,,,,opdb,,
+workspaceContentVersions,versionCreationMethod,,"The approach used to create this version of the workspace document (Add to Cart, Save to Workspace, Auto-update, Livedoc Iteration, Upload)",,,,opdb,,
+workspaceContentVersions,workspaceContentId,uniqueidentifier,The id of the workspace content that this is a version of,workspaceContents,id,,opdb,primary,Nto1
