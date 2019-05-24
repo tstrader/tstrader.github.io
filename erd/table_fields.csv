@@ -616,3 +616,9 @@ referrerEvents,category,,,,,,tbd,,
 referrerEvents,productArea,,The product area that the referrer event took place in,,,,tbd,,
 referrerEvents,application,,The application that the referrer event took place in,,,,tbd,,
 referrerEvents,occurredAt,,The datetime when the referrer event occurred,,,,tbd,,
+livesendContentDownloads,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
+livesendContentDownloads,livesendLinkContentId,uniqueidentifier,The id of the livesend link content that the page view occurred on,livesendLinkContents,id,,roadmap,primary,Nto1
+livesendContentDownloads,livesendViewingSessionId,uniqueidentifier,The id of the livesend viewing session that this page view is a part of,livesendViewingSession,id,,roadmap,primary,Nto1
+livesendContentDownloads,occurredAt,datetime,The datetime that the page view occurred,,,,roadmap,,
+livesendContentDownloads,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
+livesendContentDownloads,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
