@@ -13,6 +13,8 @@ contentProperties,teamsiteId,uniqueidentifier,The id of the teamsite that these 
 contentProperties,isRequired,boolean,One of the values assigned to the given user for this user property,,,,opdb,,
 contentProperties,hasDomainOfValues,boolean,A boolean indicating if this property has a fixed domain of values,,,,roadmap,,
 contentProperties,listOrder,integer,A 1-N number representing the order this property is in for the teamsite,,,,roadmap,,
+profileAssignments,libraryContentId,uniqueidentifier,The library content id of the content assigned to a content profile,libraryContents,id,,roadmap,,
+profileAssignments,contentProfileId,uniqueidentifier,The content profile id of the profile the content is assigned to,contentProfiles,id,,roadmap,,
 contentPropertyAssignments,libraryContentId,uniqueidentifier,The id of the content that this property applies to,libraryContents,id,,staging,primary,Nto1
 contentPropertyAssignments,contentPropertyId,uniqueidentifier,The id of the content property,contentProperties,id,,staging,primary,Nto1
 contentPropertyAssignments,contentPropertyName,nvarchar(255),The name of the content property,,,,staging,,
