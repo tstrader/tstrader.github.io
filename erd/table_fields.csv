@@ -175,8 +175,29 @@ livesendLinks,isSeparateSend,boolean,"A boolean indicating if the link was gener
 livesendLinks,trackingCode,,The tracking code entered by the user when generating the livesend link,,,,roadmap,,
 livesendLinks,createdAt,datetime,The datetime that the livesend link was created,,,,prod,,
 livesendLinks,createdBy,uniqueidentifier,The user id of the user who created the livesend link,users,id,,prod,primary,Nto1
-livesendLinks,emailId,uniqueidentifier,The id of the email that this link was sent as a part of,emails,id,,roadmap,primary,Nto1
+livesendLinks,emailId,uniqueidentifier,The id of the email that this link was sent as a part of,emails,id,,tbd,primary,Nto1
+livesendLinks,modifiedAt,datetime,The datetime that the livesend link was modified,,,,roadmap,,
+livesendLinks,modifiedBy,uniqueidentifier,The user id of the user who modified the livesend link,users,id,,roadmap,primary,Nto1
+livesendLinks,deletedAt,datetime,The datetime that the livesend link was deleted,,,,roadmap,,
+livesendLinks,deletedBy,uniqueidentifier,The user id of the user who deleted the livesend link,users,id,,roadmap,primary,Nto1
+livesendLinks,allowDownload,boolean,LiveSend Setting - is content downloadable,,,,roadmap,,
+livesendLinks,expireAfterView,boolean,LiveSend Setting - allow single view of livesend,,,,roadmap,,
+livesendLinks,expiresAt,datetime,LiveSend Setting - when the LiveSend link expires,,,,roadmap,,
+livesendLinks,password,nvarchar(50),LiveSend Setting - password set for link,,,,roadmap,,
+livesendLinks,notificationSetting,integer,LiveSend Setting - notification setting for link,,,,roadmap,,
+livesendLinks,clientApp,nvarchar(50),Application used to created link,,,,tbd,,
+livesendLinks,clientId,uniqueidentifier,Unique Id for application used to create link,,,,tbd,,
+livesendLinks,systemCreatedAt,datetime,datetime row was created,,,,roadmap,,
+livesendLinks,systemModifiedAt,datetime,datetime row was modified,,,,roadmap,,
+livesendLinks,legacyInvitationId,uniqueidentifier,The (legacy) invitationId for the link,,,,internal,,
+livesendLinkDeliveries,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
+livesendLinkDeliveries,livesendLinkId,uniqueidentifier,The id of the livesend link that this delivery goes to,livesendLinks,id,,tbd,primary,Nto1
+livesendLinkDeliveries,deliveryId,uniqueidentifier,The id of the delivery that this link was sent to,deliveries,id,,tbd,primary,Nto1
+livesendLinkDeliveries,systemCreatedAt,datetime,datetime row was created,,,,tbd,,
+livesendLinkDeliveries,systemModifiedAt,datetime,datetime row was modified,,,,tbd,,
+livesendPageViews,id,uniqueidentifier,The primary id for items in this table,,,,roadmap,,
 livesendPageViews,livesendLinkContentId,uniqueidentifier,The id of the livesend link content that the page view occurred on,livesendLinkContents,id,,prod,primary,Nto1
+livesendPageViews,contentVersionId,uniqueidentifier,The link that this maps the page view to a specific version of the content (useful for when we can/will update content),content,id,,roadmap,primary,Nto1
 livesendPageViews,occurredAt,datetime,The datetime that the page view occurred,,,,prod,,
 livesendPageViews,sessionStartedAt,datetime,The datetime that the viewing session started in the recipient's browser,,,,prod,,
 livesendPageViews,sessionEndedAt,datetime,The datetime that the viewing session ended in the recipient's browser,,,,prod,,
@@ -184,6 +205,7 @@ livesendPageViews,duration,integer,The number of milliseconds spent viewing the 
 livesendPageViews,livesendViewingSessionId,uniqueidentifier,The id of the livesend viewing session that this page view is a part of,livesendViewingSession,id,,prod,primary,Nto1
 livesendPageViews,legacyLivesendContentId,uniqueidentifier,"[INTERNAL] This is the livesendContentId from the operational database, for reference only.",,,,internal,,
 livesendPageViews,pageIndex,integer,The 1-N based page number that was viewed,,,,prod,,
+livesendPageViews,thumbnailImageId,uniqueidentifier,The id for the thumbnail,,,,tbd,,
 livesendViewingSession,id,uniqueidentifier,The primary id for items in this table,,,,tbd,,
 livesendViewingSession,livesendLinkId,uniqueidentifier,The id of the livesend link that this session is acting on,livesendLinks,id,,tbd,primary,Nto1
 livesendViewingSession,viewDetails,json,[TBD] We may want some form of summary of the session?  Maybe as multiple fields not a JSON object.,,,,tbd,,
