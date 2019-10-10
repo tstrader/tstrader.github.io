@@ -420,7 +420,6 @@ livesendLinkDeliveries,id,uniqueidentifier,The primary id for items in this tabl
 livesendLinkDeliveries,livesendLinkId,uniqueidentifier,The id of the livesend link that this delivery goes to,livesendLinks,id,,tbd,primary,Nto1
 livesendLinkDeliveries,systemCreatedAt,datetime,datetime row was created,,,,tbd,,
 livesendLinkDeliveries,systemModifiedAt,datetime,datetime row was modified,,,,tbd,,
-livesendLinkMembers,createdAt,datetime,The datetime that the link member was added to the livesend link,,,,prod,,
 livesendLinkMembers,email,,The email address of the link member,,,,prod,,
 livesendLinkMembers,externalUserId,uniqueidentifier,The id of the external user in the externalUsers table,externalUsers,id,,roadmap,primary,Nto1
 livesendLinkMembers,internalUserId,uniqueidentifier,"The id of the user if a user with this email address was found in the users table.  In the case that more than one user was found, one of them will be chosen at random.",users,id,,tbd,primary,Nto1
